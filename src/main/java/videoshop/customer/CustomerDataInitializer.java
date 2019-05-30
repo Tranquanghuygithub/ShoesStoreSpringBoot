@@ -72,27 +72,27 @@ class CustomerDataInitializer implements DataInitializer {
 		// Security nötig ist.
 
 		// Skip creation if database was already populated
-		if (userAccountManager.findByUsername("boss").isPresent()) {
-			return;
-		}
-
-		LOG.info("Creating default users and customers.");
-
-		UserAccount bossAccount = userAccountManager.create("boss", "123", Role.of("ROLE_BOSS"));
-		userAccountManager.save(bossAccount);
-
-		Role customerRole = Role.of("ROLE_CUSTOMER");
-
-		UserAccount ua1 = userAccountManager.create("hans", "123", customerRole);
-		UserAccount ua2 = userAccountManager.create("dextermorgan", "123", customerRole);
-		UserAccount ua3 = userAccountManager.create("earlhickey", "123", customerRole);
-		UserAccount ua4 = userAccountManager.create("mclovinfogell", "123", customerRole);
-
-		Customer c1 = new Customer(ua1, "wurst");
-		Customer c2 = new Customer(ua2, "Miami-Dade County");
-		Customer c3 = new Customer(ua3, "Camden County - Motel");
-		Customer c4 = new Customer(ua4, "Los Angeles");
-
-		customerRepository.saveAll(Arrays.asList(c1, c2, c3, c4));
+//		if (userAccountManager.findByUsername("boss").isPresent()) {
+//			return;
+//		}
+//
+//		LOG.info("Creating default users and customers.");
+//
+		//UserAccount bossAccount = userAccountManager.create("boss", "123", Role.of("ROLE_BOSS"));
+//		userAccountManager.save(bossAccount);
+//
+//		Role customerRole = Role.of("ROLE_CUSTOMER");
+//
+//		UserAccount ua1 = userAccountManager.create("hans", "123", customerRole);
+//		UserAccount ua2 = userAccountManager.create("dextermorgan", "123", customerRole);
+//		UserAccount ua3 = userAccountManager.create("earlhickey", "123", customerRole);
+//		UserAccount ua4 = userAccountManager.create("mclovinfogell", "123", customerRole);
+//
+//		Customer c1 = new Customer(ua1, "wurst");
+//		Customer c2 = new Customer(ua2, "Miami-Dade County");
+//		Customer c3 = new Customer(ua3, "Camden County - Motel");
+//		Customer c4 = new Customer(ua4, "Los Angeles");
+//
+//		customerRepository.saveAll(Arrays.asList(c1, c2, c3, c4));
 	}
 }

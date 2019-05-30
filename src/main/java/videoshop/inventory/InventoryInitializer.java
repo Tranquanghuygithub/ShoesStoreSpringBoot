@@ -15,7 +15,7 @@
  */
 package videoshop.inventory;
 
-import videoshop.catalog.VideoCatalog;
+
 
 import org.salespointframework.core.DataInitializer;
 import org.salespointframework.inventory.Inventory;
@@ -24,6 +24,8 @@ import org.salespointframework.quantity.Quantity;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
+
+import videoshop.catalog.VideoCatalog;
 
 /**
  * A {@link DataInitializer} implementation that will create dummy data for the application on application startup.
@@ -59,11 +61,11 @@ class InventoryInitializer implements DataInitializer {
 		// Über alle Discs iterieren und jeweils ein InventoryItem mit der Quantity 10 setzen
 		// Das heißt: Von jeder Disc sind 10 Stück im Inventar.
 
-		videoCatalog.findAll().forEach(disc -> {
-
-			// Try to find an InventoryItem for the project and create a default one with 10 items if none available
-			inventory.findByProduct(disc) //
-					.orElseGet(() -> inventory.save(new InventoryItem(disc, Quantity.of(10))));
-		});
+//		videoCatalog.findAll().forEach(disc -> {
+//
+//			// Try to find an InventoryItem for the project and create a default one with 10 items if none available
+//			inventory.findByProduct(disc) //
+//					.orElseGet(() -> inventory.save(new InventoryItem(disc, Quantity.of(10))));
+//		});
 	}
 }

@@ -28,7 +28,7 @@ import org.salespointframework.useraccount.UserAccount;
 // Um den Customer in die Datenbank zu bekommen, schreiben wir ein CustomerRepository 
 
 @Entity
-public class Customer {
+public class Customer{
 
 	private @Id @GeneratedValue long id;
 

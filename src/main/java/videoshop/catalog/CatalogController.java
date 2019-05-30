@@ -87,30 +87,30 @@ class CatalogController {
 	// (｡◕‿◕｡)
 	// Der Katalog bzw die Datenbank "weiß" nicht, dass die Disc mit einem Kommentar versehen wurde,
 	// deswegen wird die update-Methode aufgerufen
-	@PostMapping("/disc/{disc}/comments")
-	public String comment(@PathVariable Disc disc, @Valid CommentAndRating payload) {
-
-		disc.addComment(payload.toComment(businessTime.getTime()));
-		catalog.save(disc);
-
-		return "redirect:/disc/" + disc.getId();
-	}
-
-	/**
-	 * Describes the payload to be expected to add a comment.
-	 *
-	 * @author Oliver Gierke
-	 */
-	interface CommentAndRating {
-
-		@NotEmpty
-		String getComment();
-
-		@Range(min = 1, max = 5)
-		int getRating();
-
-		default Comment toComment(LocalDateTime time) {
-			return new Comment(getComment(), getRating(), time);
-		}
-	}
+//	@PostMapping("/disc/{disc}/comments")
+//	public String comment(@PathVariable Disc disc, @Valid CommentAndRating payload) {
+//
+//		disc.addComment(payload.toComment(businessTime.getTime()));
+//		catalog.save(disc);
+//
+//		return "redirect:/disc/" + disc.getId();
+//	}
+//
+//	/**
+//	 * Describes the payload to be expected to add a comment.
+//	 *
+//	 * @author Oliver Gierke
+//	 */
+//	interface CommentAndRating {
+//
+//		@NotEmpty
+//		String getComment();
+//
+//		@Range(min = 1, max = 5)
+//		int getRating();
+//
+//		default Comment toComment(LocalDateTime time) {
+//			return new Comment(getComment(), getRating(), time);
+//		}
+//	}
 }

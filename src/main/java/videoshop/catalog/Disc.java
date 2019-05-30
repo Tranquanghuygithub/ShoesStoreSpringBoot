@@ -45,8 +45,8 @@ public class Disc extends Product {
 	// Jede Disc besitzt mehrere Kommentare, eine "1 zu n"-Beziehung -> @OneToMany für JPA
 	// cascade gibt an, was mit den Kindelementen (Comment) passieren soll wenn das Parentelement (Disc) mit der Datenbank
 	// "interagiert"
-	@OneToMany(cascade = CascadeType.ALL) //
-	private List<Comment> comments = new ArrayList<>();
+//	@OneToMany(cascade = CascadeType.ALL) //
+//	private List<Comment> comments = new ArrayList<>();
 
 	@SuppressWarnings("unused")
 	private Disc() {}
@@ -64,18 +64,18 @@ public class Disc extends Product {
 		return genre;
 	}
 
-	public void addComment(Comment comment) {
-		comments.add(comment);
-	}
+//	public void addComment(Comment comment) {
+//		comments.add(comment);
+//	}
 
 	// (｡◕‿◕｡)
 	// Es ist immer sinnvoll sich zu überlegen wie speziell der Rückgabetyp sein sollte
 	// Da sowies nur über die Kommentare iteriert wird, ist ein Iterable<T> das sinnvollste.
 	// Weil wir keine Liste zurück geben, verhindern wir auch, dass jemand die comments-Liste einfach durch clear() leert.
 	// Deswegen geben auch so viele Salespoint Klassen nur Iterable<T> zurück ;)
-	public Iterable<Comment> getComments() {
-		return comments;
-	}
+//	public Iterable<Comment> getComments() {
+//		return comments;
+//	}
 
 	public String getImage() {
 		return image;
