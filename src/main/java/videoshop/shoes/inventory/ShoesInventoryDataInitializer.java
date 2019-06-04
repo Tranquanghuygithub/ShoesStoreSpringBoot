@@ -47,7 +47,6 @@ public class ShoesInventoryDataInitializer implements DataInitializer{
 		});
 	}
 	
-	
 	public void deleteShoesInventoryItem(Shoes shoes) {
 		for ( InventoryItem inventoryItem : inventory.findAll()) {
 			if (inventoryItem.getProduct().getId().equals(shoes.getId())) {
