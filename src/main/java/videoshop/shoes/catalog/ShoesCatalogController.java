@@ -69,6 +69,7 @@ public class ShoesCatalogController {
 //		ShoesInventoryDataInitializer dataInitializer = new ShoesInventoryDataInitializer(inventory, shoesCatalog);
 //		dataInitializer.deleteAll();
 //		shoesCatalog.deleteAll();
+
 		model.addAttribute("catalog", shoesCatalog.findAll());
 		//model.addAttribute("title", "catalog.dvd.title");
 
