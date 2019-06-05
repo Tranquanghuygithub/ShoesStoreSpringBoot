@@ -180,7 +180,7 @@
 						<!-- single product -->
 						<div class="col-lg-4 col-md-6" th:each="shoes : ${catalog}">
 							<div class="single-product" >
-								<a th:href="@{./detail/{id}(id=${shoes.id})}"><img class="img-fluid" th:src="@{/resources/img/product/p1.jpg}" alt=""></a>
+								<a th:href="@{./detail/{id}(id=${shoes.id})}"><img class="img-fluid" th:src="@{/resources/img/product/{image}.jpg(image=${shoes.image})}" ></a>
 								<div class="product-details">
 									<a th:href="@{./detail/{id}(id=${shoes.id})}"><h6 th:text="${shoes.name}"></h6></a>
 									<div class="price">
@@ -202,7 +202,6 @@
 								</div>
 							</div>
 						</div>
-						
 					</div>
 				</section>
 				<!-- End Best Seller -->

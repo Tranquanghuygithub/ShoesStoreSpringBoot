@@ -38,25 +38,25 @@
 				<div class="col-lg-6">
 					<div class="s_Product_carousel">
 						<div class="single-prd-item">
-							<img class="img-fluid" th:src="@{/resources/img/category/s-p1.jpg}" alt="">
+							<img class="img-fluid" th:src="@{/resources/img/product/{name}.jpg(name=${shoes.image})}" alt="">
 						</div>
 						<div class="single-prd-item">
-							<img class="img-fluid" th:src="@{/resources/img/category/s-p1.jpg}" alt="">
+							<img class="img-fluid" th:src="@{/resources/img/product/{name}.jpg(name=${shoes.image})}" alt="">
 						</div>
 						<div class="single-prd-item">
-							<img class="img-fluid" th:src="@{/resources/img/category/s-p1.jpg}" alt="">
+							<img class="img-fluid" th:src="@{/resources/img/product/{name}.jpg(name=${shoes.image})}" alt="">
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-5 offset-lg-1">
 					<div class="s_product_text">
-						<h3>Faded SkyBlu Denim Jeans</h3>
-						<h2>$149.99</h2>
+						<h3 th:text="${shoes.name}">Faded SkyBlu Denim Jeans</h3>
+						<h2  th:text="${shoes.price}">$149.99</h2>
 						<ul class="list">
-							<li><a class="active" href="#"><span>Category</span> : Household</a></li>
+							<li><span>Category: </span><a class="active" href="#"  th:text="${shoes.type}" > </a></li>
 							<li><a href="#"><span>Availibility</span> : In Stock</a></li>
 						</ul>
-						<p>Mill Oil is an innovative oil filled radiator with the most modern technology. If you are looking for
+						<p th:text="${shoes.description}">Mill Oil is an innovative oil filled radiator with the most modern technology. If you are looking for
 							something that can make your interior look awesome, and at the same time give you the pleasant warm feeling
 							during the winter.</p>
 						<div class="product_count">
@@ -67,8 +67,6 @@
 						</div>
 						<div class="card_area d-flex align-items-center">
 							<a class="primary-btn" href="#">Add to Cart</a>
-							<a class="icon_btn" href="#"><i class="lnr lnr lnr-diamond"></i></a>
-							<a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a>
 						</div>
 					</div>
 				</div>
