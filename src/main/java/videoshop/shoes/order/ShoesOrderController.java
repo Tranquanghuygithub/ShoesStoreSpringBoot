@@ -1,21 +1,4 @@
-/*
- * Copyright 2013-2018 the original author or authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-package videoshop.order;
-
-import videoshop.catalog.Disc;
+package videoshop.shoes.order;
 
 import java.util.Optional;
 
@@ -36,22 +19,16 @@ import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import videoshop.catalog.Disc;
 
-/**
- * A Spring MVC controller to manage the {@link Cart}. {@link Cart} instances are held in the session as they're
- * specific to a certain user. That's also why the entire controller is secured by a {@code PreAuthorize} clause.
- *
- * @author Paul Henke
- * @author Oliver Gierke
- */
+
 @Controller
 @PreAuthorize("isAuthenticated()")
-@SessionAttributes("cart")
-class OrderController {
-
+@SessionAttributes("storecart")
+class ShoesOrderController
+{
 	private final OrderManager<Order> orderManager;
 
 	/**
@@ -59,7 +36,7 @@ class OrderController {
 	 * 
 	 * @param orderManager must not be {@literal null}.
 	 */
-	OrderController(OrderManager<Order> orderManager) {
+	ShoesOrderController(OrderManager<Order> orderManager) {
 
 		Assert.notNull(orderManager, "OrderManager must not be null!");
 		this.orderManager = orderManager;
@@ -71,7 +48,7 @@ class OrderController {
 	 * 
 	 * @return a new {@link Cart} instance.
 	 */
-	@ModelAttribute("cart")
+	@ModelAttribute("storecart")
 	Cart initializeCart() {
 		return new Cart();
 	}
@@ -87,7 +64,7 @@ class OrderController {
 	 * @param cart must not be {@literal null}.
 	 * @return the view name.
 	 */
-	@PostMapping("/cart")
+	@PostMapping("/shoescart")
 	String addDisc(@RequestParam("pid") Disc disc, @RequestParam("number") int number, @ModelAttribute Cart cart) {
 
 		// (｡◕‿◕｡)
@@ -110,11 +87,20 @@ class OrderController {
 		}
 	}
 
-	@GetMapping("/cart")
+	@GetMapping("/shoescart")
 	String basket() {
-		return "cart";
+		return "shoescart";
 	}
 	
+	@GetMapping("/shoesconfirmation")
+	String shoesconfirmation() {
+		return "shoesconfirmation";
+	}
+	
+	@GetMapping("/shoescheckout")
+	String checkout() {
+		return "shoescheckout";
+	}
 
 	/**
 	 * Checks out the current state of the {@link Cart}. Using a method parameter of type {@code Optional<UserAccount>}
@@ -124,7 +110,7 @@ class OrderController {
 	 * @param userAccount will never be {@literal null}.
 	 * @return the view name.
 	 */
-	@PostMapping("/checkout")
+	@PostMapping("/checkout1")
 	String buy(@ModelAttribute Cart cart, @LoggedIn Optional<UserAccount> userAccount) {
 
 		return userAccount.map(account -> {
@@ -145,7 +131,7 @@ class OrderController {
 		}).orElse("redirect:/cart");
 	}
 
-	@GetMapping("/orders")
+	@GetMapping("/orders1")
 	@PreAuthorize("hasRole('BOSS')")
 	String orders(Model model) {
 
