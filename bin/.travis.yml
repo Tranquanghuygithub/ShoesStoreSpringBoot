@@ -1,0 +1,17 @@
+language: java
+
+jdk:
+  - oraclejdk8
+
+sudo: false
+
+install: mvn dependency:list -Dsort -B -U -V
+
+script:
+  - mvn verify -Pci -B -U
+  - mvn verify -Pjqa -B -U
+
+cache:
+  directories:
+    - $HOME/.m2
+

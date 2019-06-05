@@ -54,4 +54,9 @@ public class ShoesInventoryDataInitializer implements DataInitializer{
 			}
 		}
 	}
+	
+	
+	public void deleteAll() {
+		inventory.deleteAll();
+	}
 }

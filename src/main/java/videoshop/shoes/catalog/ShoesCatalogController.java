@@ -2,6 +2,7 @@ package videoshop.shoes.catalog;
 
 import static org.salespointframework.core.Currencies.EURO;
 
+
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -28,6 +29,7 @@ import videoshop.catalog.Comment;
 import videoshop.catalog.Disc;
 import videoshop.catalog.VideoCatalog;
 import videoshop.shoes.catalog.Shoes.ShoesType;
+import videoshop.shoes.inventory.ShoesInventoryDataInitializer;
 import videoshop.catalog.Disc.DiscType;
 
 @Controller
@@ -50,19 +52,23 @@ public class ShoesCatalogController {
 	String dvdCatalog(Model model) {
 		//ShoesCatalogDataInitializer shoesCatalogDataInitialize  = new ShoesCatalogDataInitializer(shoesCatalog);
 		
-		Iterable<Shoes> ds = shoesCatalog.findAll();
+//		Iterable<Shoes> ds = shoesCatalog.findAll();
+//		
+//		for (Shoes item : ds) {
+//			System.out.println(item.getId());
+//			System.out.println(item.getName());
+//		}
+//		
+//		Shoes delShoes = Iterables.get(ds, 1);
+//	
+
+//		ShoesCatalogDataInitializer shoesCatalogDataInitialize  = new ShoesCatalogDataInitializer(shoesCatalog);
+//		shoesCatalogDataInitialize.deleteShoes(inventory, delShoes);
 		
-		for (Shoes item : ds) {
-			System.out.println(item.getId());
-			System.out.println(item.getName());
-		}
-		
-		Shoes delShoes = Iterables.get(ds, 1);
-	
-		ShoesCatalogDataInitializer shoesCatalogDataInitialize  = new ShoesCatalogDataInitializer(shoesCatalog);
-		shoesCatalogDataInitialize.deleteShoes(inventory, delShoes);
-		
-//		shoesCatalogDataInitialize.addShoes(new Shoes("Last Action Hero", "lac", Money.of(100, EURO), ShoesType.DVD));
+//		shoesCatalogDataInitialize.addShoes(new Shoes("Vans Old Skools", "p4", Money.of(60, EURO), ShoesType.VANS, "This is a new shoes"));
+//		ShoesInventoryDataInitializer dataInitializer = new ShoesInventoryDataInitializer(inventory, shoesCatalog);
+//		dataInitializer.deleteAll();
+//		shoesCatalog.deleteAll();
 		model.addAttribute("catalog", shoesCatalog.findAll());
 		//model.addAttribute("title", "catalog.dvd.title");
 
@@ -74,9 +80,15 @@ public class ShoesCatalogController {
 
 //		Optional<InventoryItem> item = inventory.findByProductIdentifier(disc.getId());
 //		Quantity quantity = item.map(InventoryItem::getQuantity).orElse(NONE);
-//
 		
+		Optional<InventoryItem> item = inventory.findByProductIdentifier(shoes.getId());
+		Quantity quantity = item.map(InventoryItem::getQuantity).orElse(NONE);
 		
+		System.out.println(shoes.getImage());
+		
+		model.addAttribute("shoes", shoes);
+		model.addAttribute("quantity", quantity);
+		model.addAttribute("orderable", quantity.isGreaterThan(NONE));
 //		model.addAttribute("disc", disc);
 //		model.addAttribute("quantity", quantity);
 //		model.addAttribute("orderable", quantity.isGreaterThan(NONE));
