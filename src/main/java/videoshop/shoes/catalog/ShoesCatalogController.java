@@ -52,15 +52,20 @@ public class ShoesCatalogController {
 		
 		Iterable<Shoes> ds = shoesCatalog.findAll();
 		
-		for (Shoes item : ds) {
-			System.out.println(item.getId());
-			System.out.println(item.getName());
-		}
+		
 		
 		Shoes delShoes = Iterables.get(ds, 1);
+		
+		System.out.println(delShoes.getName());
+		
+		delShoes.setName("Update");
 	
 		ShoesCatalogDataInitializer shoesCatalogDataInitialize  = new ShoesCatalogDataInitializer(shoesCatalog);
-		shoesCatalogDataInitialize.deleteShoes(inventory, delShoes);
+		//shoesCatalogDataInitialize.deleteShoes(inventory, delShoes);
+		
+		shoesCatalogDataInitialize.updateShoes(delShoes);
+		
+		System.out.println(delShoes.getName());
 		
 //		shoesCatalogDataInitialize.addShoes(new Shoes("Last Action Hero", "lac", Money.of(100, EURO), ShoesType.DVD));
 		model.addAttribute("catalog", shoesCatalog.findAll());
