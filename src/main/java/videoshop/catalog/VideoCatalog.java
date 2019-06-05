@@ -15,12 +15,10 @@
  */
 package videoshop.catalog;
 
-
+import videoshop.catalog.Disc.DiscType;
 
 import org.salespointframework.catalog.Catalog;
 import org.springframework.data.domain.Sort;
-
-import videoshop.catalog.Disc.DiscType;
 
 /**
  * An extension of {@link Catalog} to add video shop specific query methods.

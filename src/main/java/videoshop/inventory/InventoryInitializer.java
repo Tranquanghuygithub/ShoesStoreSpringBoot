@@ -15,17 +15,18 @@
  */
 package videoshop.inventory;
 
+import videoshop.catalog.Disc;
+import videoshop.catalog.VideoCatalog;
 
-
+import org.salespointframework.catalog.ProductIdentifier;
 import org.salespointframework.core.DataInitializer;
 import org.salespointframework.inventory.Inventory;
 import org.salespointframework.inventory.InventoryItem;
 import org.salespointframework.quantity.Quantity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
-
-import videoshop.catalog.VideoCatalog;
 
 /**
  * A {@link DataInitializer} implementation that will create dummy data for the application on application startup.
@@ -36,12 +37,12 @@ import videoshop.catalog.VideoCatalog;
  */
 @Component
 @Order(20)
-class InventoryInitializer implements DataInitializer {
+public class InventoryInitializer implements DataInitializer {
 
 	private final Inventory<InventoryItem> inventory;
 	private final VideoCatalog videoCatalog;
 
-	InventoryInitializer(Inventory<InventoryItem> inventory, VideoCatalog videoCatalog) {
+	public InventoryInitializer(Inventory<InventoryItem> inventory, VideoCatalog videoCatalog) {
 
 		Assert.notNull(inventory, "Inventory must not be null!");
 		Assert.notNull(videoCatalog, "VideoCatalog must not be null!");
@@ -61,11 +62,21 @@ class InventoryInitializer implements DataInitializer {
 		// Über alle Discs iterieren und jeweils ein InventoryItem mit der Quantity 10 setzen
 		// Das heißt: Von jeder Disc sind 10 Stück im Inventar.
 
-//		videoCatalog.findAll().forEach(disc -> {
-//
-//			// Try to find an InventoryItem for the project and create a default one with 10 items if none available
-//			inventory.findByProduct(disc) //
-//					.orElseGet(() -> inventory.save(new InventoryItem(disc, Quantity.of(10))));
-//		});
+		videoCatalog.findAll().forEach(disc -> {
+
+			// Try to find an InventoryItem for the project and create a default one with 10 items if none available
+			inventory.findByProduct(disc) //
+					.orElseGet(() -> inventory.save(new InventoryItem(disc, Quantity.of(10))));
+		});
 	}
+	
+	
+	public void deleteInventoryItem(ProductIdentifier productIdentifier) {
+		for ( InventoryItem inventoryItem : inventory.findAll()) {
+			if (inventoryItem.getProduct().getId().equals(productIdentifier)) {
+				inventory.delete(inventoryItem);
+			}
+		}
+	}
+
 }

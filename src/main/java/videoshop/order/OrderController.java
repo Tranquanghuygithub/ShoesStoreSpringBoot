@@ -15,7 +15,7 @@
  */
 package videoshop.order;
 
-
+import videoshop.catalog.Disc;
 
 import java.util.Optional;
 
@@ -86,28 +86,28 @@ class OrderController {
 	 * @param cart must not be {@literal null}.
 	 * @return the view name.
 	 */
-//	@PostMapping("/cart")
-//	String addDisc(@RequestParam("pid") Disc disc, @RequestParam("number") int number, @ModelAttribute Cart cart) {
-//
-//		// (｡◕‿◕｡)
-//		// Das Inputfeld im View ist eigentlich begrenzt, allerdings sollte man immer auch serverseitig validieren
-//		int amount = number <= 0 || number > 5 ? 1 : number;
-//
-//		// (｡◕‿◕｡)
-//		// Wir fügen dem Warenkorb die Disc in entsprechender Anzahl hinzu.
-//		cart.addOrUpdateItem(disc, Quantity.of(amount));
-//
-//		// (｡◕‿◕｡)
-//		// Je nachdem ob disc eine DVD oder eine Bluray ist, leiten wir auf die richtige Seite weiter
-//
-//		switch (disc.getType()) {
-//			case DVD:
-//				return "redirect:dvds";
-//			case BLURAY:
-//			default:
-//				return "redirect:blurays";
-//		}
-//	}
+	@PostMapping("/cart")
+	String addDisc(@RequestParam("pid") Disc disc, @RequestParam("number") int number, @ModelAttribute Cart cart) {
+
+		// (｡◕‿◕｡)
+		// Das Inputfeld im View ist eigentlich begrenzt, allerdings sollte man immer auch serverseitig validieren
+		int amount = number <= 0 || number > 5 ? 1 : number;
+
+		// (｡◕‿◕｡)
+		// Wir fügen dem Warenkorb die Disc in entsprechender Anzahl hinzu.
+		cart.addOrUpdateItem(disc, Quantity.of(amount));
+
+		// (｡◕‿◕｡)
+		// Je nachdem ob disc eine DVD oder eine Bluray ist, leiten wir auf die richtige Seite weiter
+
+		switch (disc.getType()) {
+			case DVD:
+				return "redirect:dvds";
+			case BLURAY:
+			default:
+				return "redirect:blurays";
+		}
+	}
 
 	@GetMapping("/cart")
 	String basket() {
