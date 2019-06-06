@@ -28,7 +28,7 @@ import videoshop.shoes.catalog.Shoes;
 
 @Controller
 @PreAuthorize("isAuthenticated()")
-@SessionAttributes("storecart")
+@SessionAttributes("cart")
 @RequestMapping("/orders")
 class ShoesOrderController
 {
@@ -51,7 +51,7 @@ class ShoesOrderController
 	 * 
 	 * @return a new {@link Cart} instance.
 	 */
-	@ModelAttribute("storecart")
+	@ModelAttribute("cart")
 	Cart initializeCart() {
 		return new Cart();
 	}
@@ -90,12 +90,12 @@ class ShoesOrderController
 		}
 	}
 	@PostMapping("addshoes")
-	String addShoes(@RequestParam("shoes") Shoes shoes, @RequestParam("number") int number, @ModelAttribute Cart storecart) {
+	String addShoes(@RequestParam("shoes") Shoes shoes, @RequestParam("number") int number, @ModelAttribute Cart cart) {
 		int amount = number <= 0 || number > 5 ? 1 : number;
 		
-//		storecart.addOrUpdateItem(shoes, Quantity.of(amount));
+		cart.addOrUpdateItem(shoes, Quantity.of(amount));
 		
-		return "redirect:/";
+		return "redirect:../shoes/catalog";
 	}
 
 	@GetMapping("/shoescart")
