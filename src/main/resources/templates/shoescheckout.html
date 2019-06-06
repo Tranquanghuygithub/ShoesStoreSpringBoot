@@ -73,16 +73,49 @@
                     <div class="col-lg-4">
                         <div class="order_box">
                             <h2>Your Order</h2>
-                            <ul class="list">
-                                <li><a href="#">Product <span>Total</span></a></li>
-                                <li th:each="item : ${cart}">
-                               		 <a href="#" th:text="${item.productName}"> <span class="middle">x 02</span> <span class="last">$720.00</span></a>
-                                </li>
-                                
-                            </ul>
-                            <ul class="list list_2">
-                                <li><a href="#">Total <span>$2210.00</span></a></li>
-                            </ul>
+                            <div class="row">
+                        		<div class="col-md-6">
+                        		   <ul class="list list_2">
+                                		<li><a href="#">Product </a></li>
+                            		</ul>
+                        		</div>
+                        		<div class="col-md-3">
+                        		  <ul class="list list_2">
+                                		<li><a href="#">Price</a></li>
+                            		</ul>
+                        		</div>
+                        		<div class="col-md-3">
+                        		  <ul class="list list_2">
+                                		<li><a href="#">Amount </a></li>
+                            		</ul>
+                        		</div>
+                        	</div>
+                        	<div class="row" th:each="item : ${cart}">
+                        		<div class="col-md-6" th:text="${item.productName}">
+                        		
+                        		</div>
+                        		<div class="col-md-3"  th:text="${item.product.price}">
+                        		
+                        		</div>
+                        		<div class="col-md-3" th:text="'x' + ${item.quantity}">
+                        		
+                        		</div>
+                        	</div>
+                                 <div class="row">
+                        		<div class="col-md-6">
+                        		   <ul class="list list_2">
+                                		<li><a href="#">TOTAL </a></li>
+                            		</ul>
+                        		</div>
+                        		<div class="col-md-3">
+                        		
+                        		</div>
+                        		<div class="col-md-3">
+                        		  <ul class="list list_2">
+                                		<li><a href="#" th:text="${cart.price}"> </a></li>
+                            		</ul>
+                        		</div>
+                        	</div>
                        
              
                          
