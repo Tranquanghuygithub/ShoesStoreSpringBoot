@@ -19,14 +19,17 @@ import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import videoshop.catalog.Disc;
+import videoshop.shoes.catalog.Shoes;
 
 
 @Controller
 @PreAuthorize("isAuthenticated()")
-@SessionAttributes("storecart")
+@SessionAttributes("cart")
+@RequestMapping("/orders")
 class ShoesOrderController
 {
 	private final OrderManager<Order> orderManager;
@@ -48,7 +51,7 @@ class ShoesOrderController
 	 * 
 	 * @return a new {@link Cart} instance.
 	 */
-	@ModelAttribute("storecart")
+	@ModelAttribute("cart")
 	Cart initializeCart() {
 		return new Cart();
 	}
@@ -85,6 +88,15 @@ class ShoesOrderController
 			default:
 				return "redirect:blurays";
 		}
+		
+	}
+	@PostMapping("addshoes")
+	String addShoes(@RequestParam("shoes") Shoes shoes, @RequestParam("number") int number, @ModelAttribute Cart cart) {
+		int amount = number <= 0 || number > 5 ? 1 : number;
+		
+		cart.addOrUpdateItem(shoes, Quantity.of(amount));
+		
+		return "redirect:../shoes/catalog";
 	}
 
 	@GetMapping("/shoescart")
