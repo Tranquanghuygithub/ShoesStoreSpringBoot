@@ -69,16 +69,16 @@
 							      <tr>
 							      	<th></th>
 							        <th>Product Name</th>
-							        <th>Number</th>
+							        <th>Inventory</th>
 							        <th>Edit</th>
 							        <th>Delete</th>
 							      </tr>
 							    </thead>
 							    <tbody>
-							      <tr>
-							        <td><img style="height: 100px" th:src="@{/resources/img/product/e-p1.png}" alt="post"></td>
-							        <td>Vans</td>
-							        <td>5</td>
+							      <tr th:each=" item : ${stock}">
+							        <td><img style="height: 100px" th:src="@{/resources/img/product/{name}.jpg(name=${item.product.image})}" alt="post"></td>
+							        <td th:text="${item.product.name}">Vans</td>
+							        <td th:text="${{item.quantity}}">5</td>
 							        <td><a href=""><img th:src="@{/resources/img/ic_edit.png}" alt="post"></a></td>
 							        <td><a href=""><img th:src="@{/resources/img/ic_delete.png}" alt="post"></a></td>
 							      </tr>

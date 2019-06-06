@@ -64,35 +64,22 @@
                             <table class="table">
 							    <thead>
 							      <tr>
-							        <th>Firstname</th>
-							        <th>Lastname</th>
+							        <th>Username</th>
+							        
 							        <th>Email</th>
 							        <th>Address</th>
 							        <th>Delete</th>
 							      </tr>
 							    </thead>
 							    <tbody>
-							      <tr>
-							        <td>John</td>
-							        <td>Doe</td>
+							      <tr th:each=" customer : ${customerList}">
+							        <td th:text="${customer.userAccount.id}">John</td>
+							        
 							        <td>john@example.com</td>
-							        <td></td>
+							        <td th:text="${customer.address}"></td>
 							        <td><a href=""><img th:src="@{/resources/img/ic_delete.png}" alt="post"></a></td>
 							      </tr>
-							      <tr>
-							        <td>Mary</td>
-							        <td>Moe</td>
-							        <td>mary@example.com</td>
-							        <td></td>
-							        <td><a href=""><img th:src="@{/resources/img/ic_delete.png}" alt="post"></a></td>
-							      </tr>
-							      <tr>
-							        <td>July</td>
-							        <td>Dooley</td>
-							        <td>july@example.com</td>
-							        <td></td>
-							        <td><a href=""><img th:src="@{/resources/img/ic_delete.png}" alt="post"></a></td>
-							      </tr>
+							      
 							    </tbody>
 							  </table>
                         </aside>

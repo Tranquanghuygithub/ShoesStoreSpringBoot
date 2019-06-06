@@ -70,25 +70,14 @@
 							        <th>Delete</th>
 							      </tr>
 							    </thead>
-							    <tbody>
+							    <tbody th:each="order : ${ordersCompleted} ">
 							      <tr>
-							        <td>12/2/2019</td>
-							        <td>Doe</td>
-							        <td>100$</td>
+							        <td th:text="${#temporals.format(order.dateCreated, 'dd.MM.yyyy HH:mm')}"></td>
+							        <td th:text="${order.userAccount.id}"></td>
+							        <td th:text="${order.totalPrice}"></td>
 							        <td><a href=""><img th:src="@{/resources/img/ic_delete.png}" alt="post"></a></td>
 							      </tr>
-							      <tr>
-							        <td>12/2/2019</td>
-							        <td>Moe</td>
-							        <td>600$</td>
-							        <td><a href=""><img th:src="@{/resources/img/ic_delete.png}" alt="post"></a></td>
-							      </tr>
-							      <tr>
-							        <td>12/2/2019</td>
-							        <td>Dooley</td>
-							        <td>2000$</td>
-							        <td><a href=""><img th:src="@{/resources/img/ic_delete.png}" alt="post"></a></td>
-							      </tr>
+							      
 							    </tbody>
 							  </table>
                         </aside>
