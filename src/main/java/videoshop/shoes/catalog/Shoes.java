@@ -15,24 +15,27 @@ import videoshop.catalog.Comment;
 @Entity
 public class Shoes extends Product{
 	public static enum ShoesType {
-		BLURAY, DVD;
+		NIKE, VANS, CONVERSE, ADIDAS, BALENCIA;
 	}
 
 	private String image;
 	private ShoesType type;
+	private String description;
 
+	
 	@OneToMany(cascade = CascadeType.ALL) //
 	private List<Comment> comments = new ArrayList<>();
 
 	@SuppressWarnings("unused")
 	private Shoes() {}
 
-	public Shoes(String name, String image, Money price, ShoesType type) {
+	public Shoes(String name, String image, Money price, ShoesType type, String description) {
 
 		super(name, price);
 
 		this.image = image;
 		this.type = type;
+		this.description = description;
 	}
 
 	public void addComment(Comment comment) {
@@ -49,5 +52,13 @@ public class Shoes extends Product{
 
 	public ShoesType getType() {
 		return type;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }
