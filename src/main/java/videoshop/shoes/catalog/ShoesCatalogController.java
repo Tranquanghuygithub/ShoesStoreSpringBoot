@@ -51,19 +51,8 @@ public class ShoesCatalogController {
 	@GetMapping("/catalog")
 	String dvdCatalog(Model model) {
 		//ShoesCatalogDataInitializer shoesCatalogDataInitialize  = new ShoesCatalogDataInitializer(shoesCatalog);
-		
-//		Iterable<Shoes> ds = shoesCatalog.findAll();
-//		
-//		for (Shoes item : ds) {
-//			System.out.println(item.getId());
-//			System.out.println(item.getName());
-//		}
-//		
-//		Shoes delShoes = Iterables.get(ds, 1);
-//	
 
-//		ShoesCatalogDataInitializer shoesCatalogDataInitialize  = new ShoesCatalogDataInitializer(shoesCatalog);
-//		shoesCatalogDataInitialize.deleteShoes(inventory, delShoes);
+
 		
 //		shoesCatalogDataInitialize.addShoes(new Shoes("Vans Old Skools", "p4", Money.of(60, EURO), ShoesType.VANS, "This is a new shoes"));
 //		ShoesInventoryDataInitializer dataInitializer = new ShoesInventoryDataInitializer(inventory, shoesCatalog);
