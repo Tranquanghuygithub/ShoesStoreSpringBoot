@@ -71,6 +71,8 @@ public class ShoesCatalogController {
 //		shoesCatalog.deleteAll();
 
 		model.addAttribute("catalog", shoesCatalog.findAll());
+		
+		
 		//model.addAttribute("title", "catalog.dvd.title");
 
 		return "shoescatalog";
@@ -85,7 +87,7 @@ public class ShoesCatalogController {
 		Optional<InventoryItem> item = inventory.findByProductIdentifier(shoes.getId());
 		Quantity quantity = item.map(InventoryItem::getQuantity).orElse(NONE);
 		
-		System.out.println(shoes.getImage());
+//		System.out.println(shoes.getImage());
 		
 		model.addAttribute("shoes", shoes);
 		model.addAttribute("quantity", quantity);
@@ -98,6 +100,12 @@ public class ShoesCatalogController {
 
 		return "shoesdetail";
 	}
-
 	
+	@GetMapping("/catalog/{type}")
+	String FindTypeShoes(Model model, @PathVariable ShoesType type ) {
+		
+		model.addAttribute("typeShoes", shoesCatalog.findByType(type));
+		
+		return "shoescatalog";
+	}
 }
