@@ -53,8 +53,6 @@ public class VideoShop {
 		public void addViewControllers(ViewControllerRegistry registry) {
 			registry.addViewController(LOGIN_ROUTE).setViewName("login");
 			registry.addViewController("/").setViewName("index");
-			
-			
 		}
 	}
 
