@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org"  class="no-js">
+
+
+<!-- Mirrored from colorlib.com/preview/theme/karma/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 27 May 2019 15:31:56 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head th:include="head :: head"> </head>
+
+<body>
+
+	<!-- Start Header Area -->
+	<header class="header_area sticky-header" th:include="header :: header">
+		
+	</header>
+	<!-- End Header Area -->
+
+	<!-- Start Banner Area -->
+    <section class="banner-area organic-breadcrumb">
+        <div class="container">
+            <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+                <div class="col-first">
+                    <h1>Checkout</h1>
+                    <nav class="d-flex align-items-center">
+                        <a href="index-2.html">Home<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="single-product.html">Checkout</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Banner Area -->
+
+    <!--================Checkout Area =================-->
+    <section class="checkout_area section_gap">
+        <div class="container">
+            <div class="billing_details">
+                <div class="row">
+                <form class="row contact_form" action="#" method="post" novalidate="novalidate">
+                    <div class="col-lg-8">
+                        <h3>Billing Details</h3>
+                        
+                            <div class="col-md-6 form-group p_star">
+                                 <label for="name">Name</label>
+                            </div>
+                            <div class="col-md-6 form-group p_star">
+                                <input type="text" class="form-control" id="last" name="name">
+                                <span class="placeholder" data-placeholder="Last name"></span>
+                            </div>
+                            <div class="col-md-6 form-group p_star">
+                                <input type="text" class="form-control" id="number" name="number">
+                                <span class="placeholder" data-placeholder="Phone number"></span>
+                            </div>
+                            <div class="col-md-6 form-group p_star">
+                                <input type="text" class="form-control" id="email" name="compemailany">
+                                <span class="placeholder" data-placeholder="Email Address"></span>
+                            </div>
+                     
+                            <div class="col-md-12 form-group p_star">
+                                <input type="text" class="form-control" id="add1" name="add1">
+                                <span class="placeholder" data-placeholder="Address"></span>
+                            </div>
+                 
+                            <div class="col-md-12 form-group p_star">
+                                <input type="text" class="form-control" id="city" name="city">
+                                <span class="placeholder" data-placeholder="Town/City"></span>
+                            </div>
+                     
+                        
+                    
+                       
+                        
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="order_box">
+                            <h2>Your Order</h2>
+                            <div class="row">
+                        		<div class="col-md-6">
+                        		   <ul class="list list_2">
+                                		<li><a href="#">Product </a></li>
+                            		</ul>
+                        		</div>
+                        		<div class="col-md-3">
+                        		  <ul class="list list_2">
+                                		<li><a href="#">Price</a></li>
+                            		</ul>
+                        		</div>
+                        		<div class="col-md-3">
+                        		  <ul class="list list_2">
+                                		<li><a href="#">Amount </a></li>
+                            		</ul>
+                        		</div>
+                        	</div>
+                        	<div class="row" th:each="item : ${cart}">
+                        		<div class="col-md-6" th:text="${item.productName}">
+                        		
+                        		</div>
+                        		<div class="col-md-3"  th:text="${item.product.price}">
+                        		
+                        		</div>
+                        		<div class="col-md-3" th:text="'x' + ${item.quantity}">
+                        		
+                        		</div>
+                        	</div>
+                                 <div class="row">
+                        		<div class="col-md-6">
+                        		   <ul class="list list_2">
+                                		<li><a href="#">TOTAL </a></li>
+                            		</ul>
+                        		</div>
+                        		<div class="col-md-3">
+                        		
+                        		</div>
+                        		<div class="col-md-3">
+                        		  <ul class="list list_2">
+                                		<li><a href="#" th:text="${cart.price}"> </a></li>
+                            		</ul>
+                        		</div>
+                        	</div>
+                       
+             
+                         
+                            
+                            <button type="submit" class="primary-btn" th:text="#{checkout1.submit}">Registrierenaaaaaaaa</button>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Checkout Area =================-->
+
+	<!-- start footer Area -->
+	<footer th:include="footer :: footer" class="footer-area section_gap"></footer>
+	<!-- End footer Area -->
+	<div th:include="bottom :: bottom"></div>
+</body>
+<!-- Mirrored from colorlib.com/preview/theme/karma/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 27 May 2019 15:33:36 GMT -->
+</html>

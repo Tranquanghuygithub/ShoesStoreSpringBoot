@@ -36,6 +36,8 @@ public class ShoesCatalogDataInitializer{
 	
 	public void deleteShoes(Inventory<InventoryItem> inventory, Shoes shoes) {
 		ShoesInventoryDataInitializer shoesInventoryInitializer = new ShoesInventoryDataInitializer(inventory, shoesCatalog);
+		shoesInventoryInitializer.deleteShoesInventoryItem(shoes);
+		shoesCatalog.delete(shoes);
 	}
 	
 
