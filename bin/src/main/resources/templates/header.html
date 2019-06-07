@@ -1,4 +1,3 @@
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <header class="header_area sticky-header" th:fragment="header">
 		<div class="main_menu">
 			<nav class="navbar navbar-expand-lg navbar-light main_box">
@@ -38,10 +37,12 @@
 								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
 								 aria-expanded="false">Pages</a>
 								<ul class="dropdown-menu">
-									<li class="nav-item"><a th:href="@{/login}"  class="nav-link" href="login.html">Login</a></li>
+									<li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
 									<li class="nav-item"><a class="nav-link" href="tracking.html">Tracking</a></li>
+									<li class="nav-item"><a class="nav-link" href="elements.html">Elements</a></li>
 								</ul>
 							</li>
+							<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
 							<li class="nav-item"><a href="#" class="cart"><span class="ti-bag"></span></a></li>
@@ -49,14 +50,8 @@
 								<button class="search"><span class="lnr lnr-magnifier" id="search"></span></button>
 							</li>
 						</ul>
-					
 					</div>
 				</div>
-				<div class="right menu">
-           				 <form class="item" sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
-                			<button type="submit" class="genric-btn primary-border" th:text="#{nav.logout}">Logout</button>
-            			 </form>
-        		</div>
 			</nav>
 		</div>
 		<div class="search_input" id="search_input_box">
