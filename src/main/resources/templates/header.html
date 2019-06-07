@@ -36,7 +36,7 @@
 					
 					</div>
 				</div>
-				<div class="right menu">
+				<div class="right menu" style="margin-right: 5%;">
            				 <form class="item" sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
                 			<button type="submit" class="genric-btn primary-border" th:text="#{nav.logout}">Logout</button>
             			 </form>
