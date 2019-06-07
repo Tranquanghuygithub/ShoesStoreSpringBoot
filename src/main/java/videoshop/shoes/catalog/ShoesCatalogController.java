@@ -50,11 +50,23 @@ public class ShoesCatalogController {
 
 	@GetMapping("/catalog")
 	String dvdCatalog(Model model) {
-		//ShoesCatalogDataInitializer shoesCatalogDataInitialize  = new ShoesCatalogDataInitializer(shoesCatalog);
+		ShoesCatalogDataInitializer shoesCatalogDataInitialize  = new ShoesCatalogDataInitializer(shoesCatalog);
 
 
 		
-//		shoesCatalogDataInitialize.addShoes(new Shoes("Vans Old Skools", "p4", Money.of(60, EURO), ShoesType.VANS, "This is a new shoes"));
+//		shoesCatalogDataInitialize.addShoes(new Shoes("Adidas Grey", "p1", Money.of(99, EURO), ShoesType.ADIDAS, "This is a new shoes in 2019, compare with old stype, it's good"));
+//		
+//		shoesCatalogDataInitialize.addShoes(new Shoes("Adidas Grey with yellow line", "p2", Money.of(79, EURO), ShoesType.ADIDAS, "ADIDAS good with yellow"));
+//		
+//		shoesCatalogDataInitialize.addShoes(new Shoes("Van slip on dark", "p3", Money.of(80, EURO), ShoesType.VANS, "Classic Vans is good and excenlent"));
+//		
+//		shoesCatalogDataInitialize.addShoes(new Shoes("Nike air on max", "p4", Money.of(125, EURO), ShoesType.NIKE, "Nike with brown classic"));
+//		
+//		shoesCatalogDataInitialize.addShoes(new Shoes("Converse classic white", "p5", Money.of(119, EURO), ShoesType.CONVERSE, "Converse new style in 2017"));
+//		
+//		shoesCatalogDataInitialize.addShoes(new Shoes("Van red high", "p6", Money.of(59, EURO), ShoesType.VANS, "Van with background red"));
+//
+//		
 //		ShoesInventoryDataInitializer dataInitializer = new ShoesInventoryDataInitializer(inventory, shoesCatalog);
 //		dataInitializer.deleteAll();
 //		shoesCatalog.deleteAll();
