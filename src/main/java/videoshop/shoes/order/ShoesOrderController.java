@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.salespointframework.catalog.Product;
 import org.salespointframework.core.AbstractEntity;
 import org.salespointframework.order.Cart;
+import org.salespointframework.order.CartItem;
 import org.salespointframework.order.Order;
 import org.salespointframework.order.OrderManager;
 import org.salespointframework.order.OrderStatus;
@@ -18,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -97,6 +99,27 @@ class ShoesOrderController
 		cart.addOrUpdateItem(shoes, Quantity.of(amount));
 		
 		return "redirect:../shoes/catalog";
+	}
+	
+	@RequestMapping("/addtobag/{shoes}")
+	String addToBag(@PathVariable Shoes shoes, @ModelAttribute Cart cart) {
+		int amount = 1;
+		cart.addOrUpdateItem(shoes, Quantity.of(amount));
+		return "redirect:../../shoes/catalog";
+	}
+	
+	@RequestMapping("/shoescart/{shoes}")
+	String deleteItemFromCart(@PathVariable Shoes shoes, @ModelAttribute Cart cart) {
+		CartItem itemRemove = cart.toList().get(0);
+		for(int i=0; i <cart.toList().size(); i++) {
+			String cc1 = cart.toList().get(i).getProduct().getId().toString();
+			String cc2 = shoes.getId().toString();
+			if(cart.toList().get(i).getProduct().getId().toString().contentEquals(shoes.getId().toString())) {
+				itemRemove = cart.toList().get(i);
+			}
+		}
+		cart.removeItem(itemRemove.getId().toString());
+		return "redirect:http://localhost:8080/orders/shoescart";
 	}
 
 	@GetMapping("/shoescart")
