@@ -51,19 +51,8 @@ public class ShoesCatalogController {
 	@GetMapping("/catalog")
 	String dvdCatalog(Model model) {
 		//ShoesCatalogDataInitializer shoesCatalogDataInitialize  = new ShoesCatalogDataInitializer(shoesCatalog);
-		
-//		Iterable<Shoes> ds = shoesCatalog.findAll();
-//		
-//		for (Shoes item : ds) {
-//			System.out.println(item.getId());
-//			System.out.println(item.getName());
-//		}
-//		
-//		Shoes delShoes = Iterables.get(ds, 1);
-//	
 
-//		ShoesCatalogDataInitializer shoesCatalogDataInitialize  = new ShoesCatalogDataInitializer(shoesCatalog);
-//		shoesCatalogDataInitialize.deleteShoes(inventory, delShoes);
+
 		
 //		shoesCatalogDataInitialize.addShoes(new Shoes("Vans Old Skools", "p4", Money.of(60, EURO), ShoesType.VANS, "This is a new shoes"));
 //		ShoesInventoryDataInitializer dataInitializer = new ShoesInventoryDataInitializer(inventory, shoesCatalog);
@@ -71,6 +60,8 @@ public class ShoesCatalogController {
 //		shoesCatalog.deleteAll();
 
 		model.addAttribute("catalog", shoesCatalog.findAll());
+		
+		
 		//model.addAttribute("title", "catalog.dvd.title");
 
 		return "shoescatalog";
@@ -85,7 +76,7 @@ public class ShoesCatalogController {
 		Optional<InventoryItem> item = inventory.findByProductIdentifier(shoes.getId());
 		Quantity quantity = item.map(InventoryItem::getQuantity).orElse(NONE);
 		
-		System.out.println(shoes.getImage());
+//		System.out.println(shoes.getImage());
 		
 		model.addAttribute("shoes", shoes);
 		model.addAttribute("quantity", quantity);
@@ -98,6 +89,12 @@ public class ShoesCatalogController {
 
 		return "shoesdetail";
 	}
-
 	
+	@GetMapping("/catalog/{type}")
+	String FindTypeShoes(Model model, @PathVariable ShoesType type ) {
+		
+		model.addAttribute("typeShoes", shoesCatalog.findByType(type));
+		
+		return "shoescatalog";
+	}
 }
