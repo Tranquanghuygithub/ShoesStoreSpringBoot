@@ -2,6 +2,9 @@ package videoshop.shoes.order;
 
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.salespointframework.catalog.Product;
 import org.salespointframework.core.AbstractEntity;
 import org.salespointframework.order.Cart;
@@ -93,37 +96,61 @@ class ShoesOrderController
 		
 	}
 	@PostMapping("addshoes")
-	String addShoes(@RequestParam("shoes") Shoes shoes, @RequestParam("number") int number, @ModelAttribute Cart cart) {
+	String addShoes(@RequestParam("shoes") Shoes shoes, @RequestParam("number") int number, @ModelAttribute Cart cart,HttpSession session) {
 		int amount = number <= 0 || number > 5 ? 1 : number;
 		
 		cart.addOrUpdateItem(shoes, Quantity.of(amount));
+		
+		int cartsize = cart.toList().size();
+		session.setAttribute("cartsize", cartsize);
 		
 		return "redirect:../shoes/catalog";
 	}
 	
 	@RequestMapping("/addtobag/{shoes}")
-	String addToBag(@PathVariable Shoes shoes, @ModelAttribute Cart cart) {
+	String addToBag(@PathVariable Shoes shoes, @ModelAttribute Cart cart,HttpSession session) {
+		
 		int amount = 1;
 		cart.addOrUpdateItem(shoes, Quantity.of(amount));
+		
+		int cartsize = cart.toList().size();
+		session.setAttribute("cartsize", cartsize);
+		
 		return "redirect:../../shoes/catalog";
 	}
 	
 	@RequestMapping("/shoescart/{shoes}")
-	String deleteItemFromCart(@PathVariable Shoes shoes, @ModelAttribute Cart cart) {
+	String deleteItemFromCart(@PathVariable Shoes shoes, @ModelAttribute Cart cart, HttpSession session) {
+		
 		CartItem itemRemove = cart.toList().get(0);
 		for(int i=0; i <cart.toList().size(); i++) {
-			String cc1 = cart.toList().get(i).getProduct().getId().toString();
-			String cc2 = shoes.getId().toString();
 			if(cart.toList().get(i).getProduct().getId().toString().contentEquals(shoes.getId().toString())) {
 				itemRemove = cart.toList().get(i);
 			}
 		}
 		cart.removeItem(itemRemove.getId().toString());
+		
+		int cartsize = cart.toList().size();
+		session.setAttribute("cartsize", cartsize);
+		
 		return "redirect:http://localhost:8080/orders/shoescart";
 	}
-
+	@PostMapping("updatecart")
+	String updatecart(@RequestParam("qty") int[] quantity,@RequestParam("id") Shoes[] shoes, @ModelAttribute Cart cart) {
+		cart.clear();
+		for(int i =0; i < quantity.length; i++) {
+			cart.addOrUpdateItem(shoes[i], Quantity.of(quantity[i]));
+		}
+		System.out.println(shoes[0]);
+		System.out.println(quantity[0]);
+		return "redirect:http://localhost:8080/orders/shoescart";
+	}
+	
+	
 	@GetMapping("/shoescart")
 	String basket() {
+//		int cartsize = cart.toList().size();
+//		session.setAttribute("cartsize", cartsize);
 		return "shoescart";
 	}
 	
