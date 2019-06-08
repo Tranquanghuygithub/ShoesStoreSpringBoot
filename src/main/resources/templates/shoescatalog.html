@@ -24,7 +24,7 @@
 					<nav class="d-flex align-items-center">
 						<a href="index-2.html">Home<span class="lnr lnr-arrow-right"></span></a>
 						<a href="#">Shop<span class="lnr lnr-arrow-right"></span></a>
-						<a href="category.html">Fashon Category</a>
+						<a href="category.html">Fashion Category</a>
 					</nav>
 				</div>
 			</div>
@@ -89,7 +89,7 @@
 						<!-- single product -->
 						<div class="col-lg-4 col-md-6" th:each="shoes : ${catalog}">
 							<div class="single-product" >
-								<a th:href="@{./detail/{id}(id=${shoes.id})}"><img class="img-fluid" th:src="@{/resources/img/product/{image}.jpg(image=${shoes.image})}" ></a>
+								<a th:href="@{./detail/{id}(id=${shoes.id})}"><img class="img-fluid" th:src="@{/resources/img/product/{image}(image=${shoes.image})}" ></a>
 								<div class="product-details">
 									<a th:href="@{./detail/{id}(id=${shoes.id})}"><h6 th:text="${shoes.name}"></h6></a>
 									<div class="price">
@@ -115,7 +115,7 @@
 					<div class ="row">
 							<div class="col-lg-4 col-md-6" th:each="shoes : ${typeShoes}">
 							<div class="single-product" >
-								<a th:href="@{http://localhost:8080/shoes/detail/{id}(id=${shoes.id})}"><img class="img-fluid" th:src="@{/resources/img/product/{image}.jpg(image=${shoes.image})}" ></a>
+								<a th:href="@{http://localhost:8080/shoes/detail/{id}(id=${shoes.id})}"><img class="img-fluid" th:src="@{/resources/img/product/{image}(image=${shoes.image})}" ></a>
 								<div class="product-details">
 									<a th:href="@{http://localhost:8080/shoes/detail/{id}(id=${shoes.id})}"><h6 th:text="${shoes.name}"></h6></a>
 									<div class="price">

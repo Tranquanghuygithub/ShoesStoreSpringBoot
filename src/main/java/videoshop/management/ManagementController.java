@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import videoshop.customer.Customer;
 import videoshop.customer.CustomerManagement;
+import videoshop.shoes.catalog.AddShoesForm;
 import videoshop.shoes.catalog.Shoes;
 
 
@@ -68,9 +69,9 @@ public class ManagementController {
 	
 	@GetMapping("/addShoes")
 	//@PreAuthorize("hasRole('BOSS')")
-	String AddShoes(Model model) {
+	String AddShoes(Model model, AddShoesForm Shoesform) {
 
-		//model.addAttribute("stock", inventory.findAll());
+		model.addAttribute("productform", Shoesform);
 
 		return "add_shoes";
 	}

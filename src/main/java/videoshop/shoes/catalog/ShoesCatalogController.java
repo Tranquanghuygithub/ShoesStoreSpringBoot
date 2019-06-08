@@ -2,7 +2,8 @@ package videoshop.shoes.catalog;
 
 import static org.salespointframework.core.Currencies.EURO;
 
-
+import java.io.File;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -21,6 +22,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.google.common.collect.Iterables;
 
@@ -31,6 +34,13 @@ import videoshop.catalog.VideoCatalog;
 import videoshop.shoes.catalog.Shoes.ShoesType;
 import videoshop.shoes.inventory.ShoesInventoryDataInitializer;
 import videoshop.catalog.Disc.DiscType;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+
 
 @Controller
 @RequestMapping("/shoes")
@@ -96,5 +106,46 @@ public class ShoesCatalogController {
 		model.addAttribute("typeShoes", shoesCatalog.findByType(type));
 		
 		return "shoescatalog";
+	}
+	
+
+	private static String UPLOADED_FOLDER = "D:\\ShoesStoreSpringBoot\\src\\main\\resources\\static\\resources\\img\\product\\";
+	@PostMapping("/addshoes")
+	String AddShoes(@Valid AddShoesForm productform, @RequestParam("shoestype") String shoestype, @RequestParam("file") MultipartFile file) {
+		
+	
+       
+		
+		ShoesType type = checkShoesType(shoestype);
+		Shoes shoes = new Shoes(productform.getName(), file.getOriginalFilename(), Money.of(Integer.parseInt(productform.getPrice()), EURO), type, productform.getDescription());
+		ShoesCatalogDataInitializer catalogData = new ShoesCatalogDataInitializer(shoesCatalog);
+		catalogData.addShoes(shoes);
+		
+		byte[] bytes;
+		try {
+			bytes = file.getBytes();
+			Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
+		    Files.write(path, bytes);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+//		System.out.println(productform.getName());
+//		System.out.println(productform.getPrice());
+//		System.out.println(file.getOriginalFilename());
+//		System.out.println(shoestype);
+//		System.out.println(productform.getDescription());
+		return "redirect:/";
+	}
+	
+	public ShoesType checkShoesType(String value) {
+		if(value.contentEquals("adidas"))
+			return ShoesType.ADIDAS;
+		else if(value.contentEquals("nike"))
+			return ShoesType.NIKE;
+		else if(value.contentEquals("converse"))
+			return ShoesType.CONVERSE;
+		
+		return ShoesType.VANS;
 	}
 }

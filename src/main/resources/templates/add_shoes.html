@@ -40,65 +40,73 @@
         <div class="container">
             <div class="row">
                 
-                    
-                <div class="col-lg-12">
+                 <div class="col-lg-2">
+                 </div>
+                <div class="col-lg-8">
                     <div class="blog_right_sidebar">
                     
                         <aside class="single_sidebar_widget search_widget">
                         <h4 class="widget_title">ADD NEW PRODUCT</h4>
                         
-                            <form class="row contact_form" action="#" method="post" novalidate="novalidate">
-	                            <div class="col-md-6 form-group p_star">
-	                                <input type="text" class="form-control" id="first" name="name">
-	                                <span class="placeholder" data-placeholder="First name"></span>
+                            <form class="row contact_form" enctype="multipart/form-data" th:action="@{../../shoes/addshoes}" method="post" th:object="${productform}" novalidate="novalidate" >
+	                            <div class="col-md-12 form-group p_star">
+	                                <input type="text" class="form-control" id="name" name="name"  placeholder="Shoes Name">
+
 	                            </div>
-	                            
-	                            <div class="col-md-6 form-group p_star">
-	                                <input type="text" class="form-control" id="last" name="name">
-	                                <span class="placeholder" data-placeholder="Last name"></span>
-	                            </div>
-	                            
-	                            <div class="col-md-12 form-group p_star">                 
-	                                <input type="text" class="form-control" id="company" name="company" >
-	                                <span class="placeholder" data-placeholder="Company"></span>
-	                            </div>
-	                            <div class="col-md-6 form-group p_star">
-	                                <input type="text" class="form-control" id="number" name="number">
-	                                <span class="placeholder" data-placeholder="Phone number"></span>
-	                            </div>
-	                            <div class="col-md-6 form-group p_star">
-	                                <input type="text" class="form-control" id="email" name="compemailany">
-	                                <span class="placeholder" data-placeholder="Email Address"></span>
+
+	                            <div class="col-md-12 form-group p_star"> 
+	                            	<div class="row">
+	                            			<div class="col-md-3">
+	                            				<input type="file" name="file"> 
+	                            			</div>
+			                            	 
+	                            	</div>
+	                               
 	                            </div>
 	                            <div class="col-md-12 form-group p_star">
-	                                <select class="country_select" style="display: none;">
-	                                    <option value="1">Country</option>
-	                                    <option value="2">Country</option>
-	                                    <option value="4">Country</option>
-	                                </select><div class="nice-select country_select" tabindex="0"><span class="current">Country</span><ul class="list"><li data-value="1" class="option selected focus">Country</li><li data-value="2" class="option">Country</li><li data-value="4" class="option">Country</li></ul></div>
-	                            </div>
-	                            <div class="col-md-12 form-group p_star">
-	                                <input type="text" class="form-control" id="add1" name="add1">
-	                                <span class="placeholder" data-placeholder="Address line 01"></span>
-	                            </div>
-	                            <div class="col-md-12 form-group p_star">
-	                                <input type="text" class="form-control" id="add2" name="add2">
-	                                <span class="placeholder" data-placeholder="Address line 02"></span>
-	                            </div>
-	                            <div class="col-md-12 form-group p_star">
-	                                <input type="text" class="form-control" id="city" name="city">
-	                                <span class="placeholder" data-placeholder="Town/City"></span>
+	                                <input type="number" class="form-control" id="price" name="price"  placeholder="Price">
+	                                
 	                            </div>
 	                            
+	                                 <div class="col-md-12 form-group p_star">
+		                                <select id="shoestype" name="shoestype"  class="country_select" style="display: none;">
+		                                    <option value="adidas">Adidas</option>
+		                                    <option value="nike">Nike</option>
+		                                    <option value="converse">Converse</option>
+		                                    <option value="vans">Vans</option>
+		                                </select>
+	                         
+	                            </div>
+	                            <div class="col-md-12 form-group p_star">
+	                                <input type="text" class="form-control" id="description" name="description"  placeholder="Description">
+	                               
+	                            </div>
+	                       
 	                            
-	                            <div class="col-md-6 form-group p_star"> 
-	                            	<a class="primary-btn" href="#">ADD NEW</a>
-	                            	<a class="primary-btn" href="#">BACK</a>
+	                            
+	                            
+	                            <div class="col-md-12 form-group p_star">
+	                            <div class="row">
+	                            	<div class="col-md-6">
+												                            	
+	                            	</div>
+	                            	<div class="col-md-6" style="padding-left: 111px">
+	                            		<div class="row">
+	                            			<button type="submit" class="primary-btn">ADD NEW</button>
+	                            			<a class="primary-btn" style="margin-left: 7px" href="#">BACK</a>
+	                            		</div>
+	                            
+	                            	</div>
+	                            	
+	                            </div>
+	                            	
 	                            </div>  
 	                        </form>
                         </aside>
                         
                     </div>
+                </div>
+                <div class="col-lg-2">
                 </div>
             </div>
         </div>
