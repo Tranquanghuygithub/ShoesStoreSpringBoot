@@ -1,60 +1,114 @@
 <!DOCTYPE html>
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org"  class="no-js">
 
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
 
-    <script th:src="@{/webjars/jquery/jquery.min.js}"
-            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
-            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
-    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
-          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
-    <link th:href="@{/resources/css/style.css}" rel="stylesheet"
-          href="../static/resources/css/style.css" type="text/css"/>
+<!-- Mirrored from colorlib.com/preview/theme/karma/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 27 May 2019 15:31:56 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head th:include="head :: head"> </head>
 
-    <title th:text="#{register.title}">Registrierung</title>
-</head>
 <body>
-<div class="ui container">
-    <header>
-        <h1 th:text="#{register.title}">Registrierung</h1>
-    </header>
-    <nav th:include="navigation :: navigation"></nav>
 
-    <form method="post" role="form" class="ui form" id="form" th:action="@{/register}" th:object="${form}">
+	<!-- Start Header Area -->
+	<header class="header_area sticky-header" th:include="header :: header">
+		
+	</header>
+	<!-- End Header Area -->
+<!-- Start Banner Area -->
+	<section class="banner-area organic-breadcrumb">
+		<div class="container">
+			<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+				<div class="col-first">
+					<h1>Login/Register</h1>
+					<nav class="d-flex align-items-center">
+						<a href="index-2.html">Home<span class="lnr lnr-arrow-right"></span></a>
+						<a href="category.html">Login/Register</a>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End Banner Area -->
 
-        <h3 class="ui dividing header" th:text="#{register.userdata}">Nutzerdaten</h3>
-
-        <div class="ui negative message" th:if="${#fields.hasErrors('*')}">
-            <p>Einige Angaben sind nicht korrekt.</p>
-        </div>
-
-        <div class="field">
-            <label for="name">Name</label>
-            <input id="name" name="name" th:field="*{name}" th:errorclass="fieldError" type="text" required="required"/><br/>
-            <div class="ui negative message" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
-                <p>Der Name darf nicht leer sein.</p>
-            </div>
-        </div>
-
-        <div class="field">
-            <label th:text="#{register.password}" for="password">Passwort</label>
-            <input id="password" name="password" th:field="*{password}" th:errorclass="fieldError" type="text"
-                   required="required"/><br/>
-            <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Das Passwort darf
-                nicht leer sein.</p>
-        </div>
-        <div class="field">
-            <label th:text="#{register.address}" for="address">Straße</label>
-            <input id="address" name="address" th:field="*{address}" th:errorclass="fieldError" type="text"
-                   required="required"/><br/>
-            <p th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Die Adresse darf
-                nicht leer sein.</p>
-        </div>
-
-        <button type="submit" class="ui button" th:text="#{register.submit}">Registrieren</button>
-    </form>
-</div>
+	<!--================Login Box Area =================-->
+	<section class="login_box_area section_gap">
+		<div class="container">
+			<div class="row">
+			<div class="col-lg-6">
+					<div class="login_box_img">
+						<img class="img-fluid" th:src="@{/resources/img/login.jpg}" alt="">
+						<div class="hover">
+							<h4>Welcom to our store :) <3 </h4>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="login_form_inner">
+						<h2>Register</h2>
+						<form class="row login_form" role="form" id="form" th:action="@{/register}" th:object="${form}" method="post">
+					<!-- mess -->	 
+						 	<div class="col-lg-12 form-group negative message" th:if="${#fields.hasErrors('*')}">
+						 		<p>Some information is incorrect.</p>
+						 	</div>
+					<!-- user name -->	 	
+							<div class="col-md-12 form-group ">
+								<input type="text" class="form-control" id="name" name="name" th:field="*{name}" required="required" 
+								th:errorclass="fieldError" placeholder="Username" 
+								onfocus="if (!window.__cfRLUnblockHandlers) return false; this.placeholder = ''
+								" onblur="if (!window.__cfRLUnblockHandlers) return false; this.placeholder = 'Username'" 
+								data-cf-modified-fd2c530eb23092ed3c29bac9-="">
+							<!-- mess -->	
+								<div class="col-lg-12 form-group negative message" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
+									<p>The name can not be empty.</p>
+								</div>
+							</div>
+					<!-- password -->		
+							<div class="col-md-12 form-group">
+								<input type="password" class="form-control" id="password" name="password" th:field="*{password}" 
+									th:errorclass="fieldError" required="required" placeholder="Password"
+								 onfocus="if (!window.__cfRLUnblockHandlers) return false; this.placeholder = ''"
+								 onblur="if (!window.__cfRLUnblockHandlers) return false; this.placeholder = 'Password'" 
+								 data-cf-modified-fd2c530eb23092ed3c29bac9-="">
+							<!-- mess -->	
+								<div class="col-lg-12 form-group negative message" th:if="${#fields.hasErrors('password')}" 
+									th:errors="*{password}">
+									<p>The password is allowed not be empty.</p>
+								</div>
+							</div>
+					 <!-- confirn password
+							<div class="col-md-12 form-group">
+								<input type="password" class="form-control" id="password" name="password" placeholder="Confirn Password"
+								 onfocus="if (!window.__cfRLUnblockHandlers) return false; this.placeholder = ''"
+								 onblur="if (!window.__cfRLUnblockHandlers) return false; this.placeholder = 'Confirn Password'" 
+								 data-cf-modified-fd2c530eb23092ed3c29bac9-="">
+							</div> -->
+					<!-- address -->
+							<div class="col-md-12 form-group">
+								<input type="text" class="form-control" id="address" name="address" placeholder="Address"
+								th:field="*{address}" th:errorclass="fieldError" required="required"
+								 onfocus="if (!window.__cfRLUnblockHandlers) return false; this.placeholder = ''"
+								 onblur="if (!window.__cfRLUnblockHandlers) return false; this.placeholder = 'Address'" 
+								 data-cf-modified-fd2c530eb23092ed3c29bac9-="">
+							<!-- mess -->	
+								<div class="col-lg-12 form-group negative message" th:if="${#fields.hasErrors('address')}" 
+								th:errors="*{address}">
+									<p>The address can not be empty.</p>
+								</div>
+							</div>
+							<div class="col-md-12 form-group">
+								<button type="submit" class="primary-btn">Resgister</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--================End Login Box Area =================-->
+	
+	<!-- start footer Area -->
+	<footer th:include="footer :: footer" class="footer-area section_gap"></footer>
+	<!-- End footer Area -->
+	<div th:include="bottom :: bottom"></div>
 </body>
+<!-- Mirrored from colorlib.com/preview/theme/karma/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 27 May 2019 15:33:36 GMT -->
 </html>
