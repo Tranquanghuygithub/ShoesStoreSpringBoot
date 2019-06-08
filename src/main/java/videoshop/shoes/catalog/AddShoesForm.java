@@ -8,6 +8,8 @@ public interface AddShoesForm {
 	@NotEmpty(message = "{AddShoesForm.price.NotEmpty}") //
 	String getPrice();
 	
+	@NotEmpty(message = "{AddShoesForm.inventory.NotEmpty}") //
+	String getInventory();
 //	@NotEmpty(message = "{AddShoesForm.shoestype.value.NotEmpty}") //
 //	String getShoesType();
 	

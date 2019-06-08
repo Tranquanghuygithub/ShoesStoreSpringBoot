@@ -1,5 +1,9 @@
 package videoshop.management;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import org.salespointframework.inventory.Inventory;
 import org.salespointframework.inventory.InventoryItem;
 import org.salespointframework.order.Order;
@@ -12,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import videoshop.customer.Customer;
 import videoshop.customer.CustomerManagement;
@@ -74,6 +79,32 @@ public class ManagementController {
 		model.addAttribute("productform", Shoesform);
 
 		return "add_shoes";
+	}
+	
+	@GetMapping(value = "/shoesStock/")
+	String SearchShoes(@RequestParam(value = "search", required = false) String q, Model model) {
+
+		if (q.isEmpty()) {
+			model.addAttribute("stock", inventory.findAll());
+		} else {
+			
+			List<InventoryItem> shoesList = (List<InventoryItem>) inventory.findAll();
+			
+			List<InventoryItem> shoesListResult = new ArrayList<InventoryItem>(); 
+						
+			for (InventoryItem inventoryItem : shoesList) {
+				if (inventoryItem.getProduct().getName().contains(q)) {
+					shoesListResult.add(inventoryItem);
+				}
+			}
+	
+			model.addAttribute("stock", shoesListResult);
+			
+			model.addAttribute("search", q);
+
+		}
+
+		return "shoesstock";
 	}
 	
 	
