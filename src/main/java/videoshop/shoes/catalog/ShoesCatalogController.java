@@ -54,7 +54,7 @@ public class ShoesCatalogController {
 
 
 		
-//		shoesCatalogDataInitialize.addShoes(new Shoes("Adidas Grey", "p1", Money.of(99, EURO), ShoesType.ADIDAS, "This is a new shoes in 2019, compare with old stype, it's good"));
+//		shoesCatalogDataInitialize.addShoes(new Shoes("Adidas", "p1", Money.of(99, EURO), ShoesType.ADIDAS, "This is a new shoes in 2019, compare with old stype, it's good"));
 //		
 //		shoesCatalogDataInitialize.addShoes(new Shoes("Adidas Grey with yellow line", "p2", Money.of(79, EURO), ShoesType.ADIDAS, "ADIDAS good with yellow"));
 //		
@@ -65,7 +65,7 @@ public class ShoesCatalogController {
 //		shoesCatalogDataInitialize.addShoes(new Shoes("Converse classic white", "p5", Money.of(119, EURO), ShoesType.CONVERSE, "Converse new style in 2017"));
 //		
 //		shoesCatalogDataInitialize.addShoes(new Shoes("Van red high", "p6", Money.of(59, EURO), ShoesType.VANS, "Van with background red"));
-//
+
 //		
 //		ShoesInventoryDataInitializer dataInitializer = new ShoesInventoryDataInitializer(inventory, shoesCatalog);
 //		dataInitializer.deleteAll();
@@ -108,5 +108,14 @@ public class ShoesCatalogController {
 		model.addAttribute("typeShoes", shoesCatalog.findByType(type));
 		
 		return "shoescatalog";
+	}
+	
+	@GetMapping("/delete/{shoes}")
+	String DeleteShoes(@PathVariable Shoes shoes, Model model) {
+		
+		ShoesCatalogDataInitializer dataInitializer = new ShoesCatalogDataInitializer(shoesCatalog);
+		dataInitializer.deleteShoes(inventory, shoes);
+
+		return "redirect:../../management/shoesStock";
 	}
 }
