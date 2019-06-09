@@ -77,7 +77,7 @@
 							    </thead>
 							    <tbody>
 							      <tr th:each=" item : ${stock}">
-							        <td><img style="height: 100px" th:src="@{/resources/img/product/{name}.jpg(name=${item.product.image})}" alt="post"></td>
+							        <td><img style="height: 100px" th:src="@{/resources/img/product/{name}(name=${item.product.image})}" alt="post"></td>
 							        <td th:text="${item.product.name}">Vans</td>
 							        <td th:text="${{item.quantity}}">5</td>
 							        <td><a href=""><img th:src="@{/resources/img/ic_edit.png}" alt="post"></a></td>
