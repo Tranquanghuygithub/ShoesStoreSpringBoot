@@ -75,7 +75,7 @@
 							        <td th:text="${#temporals.format(order.dateCreated, 'dd.MM.yyyy HH:mm')}"></td>
 							        <td th:text="${order.userAccount.id}"></td>
 							        <td th:text="${order.totalPrice}"></td>
-							        <td><a href=""><img th:src="@{/resources/img/ic_delete.png}" alt="post"></a></td>
+							        <td><a th:href="@{/management/orders/{id}(id=${order.getId()})}"><img th:src="@{/resources/img/ic_delete.png}" alt="post"></a></td>
 							      </tr>
 							      
 							    </tbody>

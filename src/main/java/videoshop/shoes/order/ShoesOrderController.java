@@ -224,4 +224,8 @@ class ShoesOrderController
 	
 		return "orders";
 	}
+	
+	public void deleteOrder(Order order) {
+		orderManager.delete(order);
+	}
 }

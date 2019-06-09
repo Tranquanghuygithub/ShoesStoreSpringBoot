@@ -1,5 +1,6 @@
 package videoshop.shoes.inventory;
 
+import org.salespointframework.catalog.Product;
 import org.salespointframework.catalog.ProductIdentifier;
 import org.salespointframework.core.DataInitializer;
 import org.salespointframework.inventory.Inventory;
@@ -57,6 +58,5 @@ public class ShoesInventoryDataInitializer implements DataInitializer{
 	
 	public void deleteAll() {
 		inventory.deleteAll();
-	
 	}
 }
