@@ -109,6 +109,59 @@ public class ManagementController {
 	}
 	
 	
+	@GetMapping(value = "/orders/")
+	String SearchOrder(@RequestParam(value = "search", required = false) String q, Model model) {
+
+		if (q.isEmpty()) {
+			model.addAttribute("ordersCompleted", orderManager.findBy(OrderStatus.COMPLETED));
+		} else {
+			
+			Streamable<Order> orderList = orderManager.findBy(OrderStatus.COMPLETED);
+			
+			List<Order> orderListResult = new ArrayList<Order>(); 
+						
+			for (Order item : orderList) {
+				if (item.getUserAccount().getUsername().contains(q)) {
+					orderListResult.add(item);
+				}
+			}
+	
+			model.addAttribute("ordersCompleted", orderListResult);
+			
+			model.addAttribute("search", q);
+
+		}
+
+		return "orders_management";
+	}
+	
+	@GetMapping(value = "/customers/")
+	String SearchCustomer(@RequestParam(value = "search", required = false) String q, Model model) {
+
+		if (q.isEmpty()) {
+			model.addAttribute("customerList", customerManagement.findAll());
+		} else {
+			
+			Streamable<Customer> customerList = customerManagement.findAll();
+			
+			List<Customer> customerListResult = new ArrayList<Customer>(); 
+						
+			for (Customer item : customerList) {
+				if (item.getUserAccount().getUsername().contains(q)) {
+					customerListResult.add(item);
+				}
+			}
+	
+			model.addAttribute("customerList", customerListResult);
+			
+			model.addAttribute("search", q);
+
+		}
+
+		return "customer_management";
+	}
+	
+	
 	@GetMapping("/orders/{order}")
 	//@PreAuthorize("hasRole('BOSS')")
 	String DeleteOrder(@PathVariable Order order, Model model) {

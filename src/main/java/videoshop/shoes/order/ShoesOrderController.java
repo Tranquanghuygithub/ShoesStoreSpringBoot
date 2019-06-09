@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import videoshop.catalog.Disc;
 import videoshop.shoes.catalog.Shoes;
+import videoshop.shoes.catalog.ShoesCatalogDataInitializer;
 
 
 @Controller
@@ -225,7 +226,10 @@ class ShoesOrderController
 		return "orders";
 	}
 	
-	public void deleteOrder(Order order) {
+	@GetMapping("/delete/{order}")
+	String DeleteShoes(@PathVariable Order order, Model model) {
 		orderManager.delete(order);
+		return "redirect:../../management/orders";
 	}
+	
 }
