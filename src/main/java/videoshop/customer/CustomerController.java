@@ -17,13 +17,19 @@ package videoshop.customer;
 
 import javax.validation.Valid;
 
+import org.springframework.data.util.Streamable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Assert;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import videoshop.shoes.catalog.Shoes;
+import videoshop.shoes.catalog.ShoesCatalogDataInitializer;
 
 @Controller
 class CustomerController {
@@ -67,7 +73,23 @@ class CustomerController {
 	String customers(Model model) {
 
 		model.addAttribute("customerList", customerManagement.findAll());
+//		
+//		Streamable<Customer> s = customerManagement.findAll();
+//		
+//		for (Customer customer : s) {
+//			customer.getUserAccount().getId().getIdentifier();
+//		}
 
 		return "customers";
 	}
+	
+	@GetMapping(value = "/delete/")
+	String DeleteCustomer(@RequestParam(value = "id", required = false) int id, Model model) {
+		
+		System.out.println("123");
+
+		return "redirect:../../management/customers";
+	}
+	
+	
 }

@@ -1,6 +1,7 @@
 package videoshop.shoes.catalog;
 
 
+import org.javamoney.moneta.Money;
 import org.salespointframework.inventory.Inventory;
 import org.salespointframework.inventory.InventoryItem;
 import org.slf4j.Logger;
@@ -9,6 +10,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
+import videoshop.shoes.catalog.Shoes.ShoesType;
 import videoshop.shoes.inventory.ShoesInventoryDataInitializer;
 
 @Component
@@ -27,6 +29,8 @@ public class ShoesCatalogDataInitializer{
 	}
 	
 	public void addShoes(Shoes shoes) {
+//		Assert.notNull(form, "Registration form must not be null!");
+//		Shoes shoes = new Shoes(form.getName(), "null", Money.of(Integer.parseInt(form.getPrice()), "EURO"), ShoesType.ADIDAS, form.getDescription());
 		shoesCatalog.save(shoes);
 	}
 	

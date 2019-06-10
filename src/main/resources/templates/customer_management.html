@@ -20,8 +20,7 @@
                 <div class="col-first">
                     <h1>Management Page</h1>
                     <nav class="d-flex align-items-center">
-                        <a href="index-2.html">Home<span class="lnr lnr-arrow-right"></span></a>
-                        <a href="category.html">Blog</a>
+                        
                     </nav>
                 </div>
             </div>
@@ -46,38 +45,33 @@
                     
                         <aside class="single_sidebar_widget search_widget">
                         <h4 class="widget_title">CUSTOMER MANAGEMENT</h4>
-                        
-                            <div class="row">
-							  <div class="col-6 col-md-4"></div>
-							  <div class="col-6 col-md-4">
-							  <div class="input-group">
-	                                <input type="text" class="form-control" placeholder="Search " onfocus="if (!window.__cfRLUnblockHandlers) return false; this.placeholder = ''" onblur="if (!window.__cfRLUnblockHandlers) return false; this.placeholder = 'Search Posts'" data-cf-modified-b98379993bc7fc32e17d77d1-="">
-	                                <span class="input-group-btn">
-	                                    <button class="btn btn-default" type="button"><i class="lnr lnr-magnifier"></i></button>
-	                                </span>
-	                            </div><!-- /input-group -->
-							  </div>
-							  <div class="col-6 col-md-4"></div>
-							</div>
+                        	<form action="" th:action="@{http://localhost:8080/management/customers/}" method="get" th:object="${search}">
+	                            <div class="row">
+								  <div class="col-6 col-md-4"></div>
+								  <div class="col-6 col-md-4">
+								  <div class="input-group">
+		                                <input type="text" class="form-control" name="search" placeholder="Search " th:value="${search}" onfocus="if (!window.__cfRLUnblockHandlers) return false; this.placeholder = ''" onblur="if (!window.__cfRLUnblockHandlers) return false; this.placeholder = 'Search Posts'" data-cf-modified-b98379993bc7fc32e17d77d1-="">
+		                                <span class="input-group-btn">
+		                                    <button class="btn btn-default" type="submit"><i class="lnr lnr-magnifier"></i></button>
+		                                </span>
+		                            </div><!-- /input-group -->
+								  </div>
+								  <div class="col-6 col-md-4"></div>
+								</div>
+							</form>
                             </br>
                             
                             <table class="table">
 							    <thead>
 							      <tr>
 							        <th>Username</th>
-							        
-							        <th>Email</th>
 							        <th>Address</th>
-							        <th>Delete</th>
 							      </tr>
 							    </thead>
 							    <tbody>
 							      <tr th:each=" customer : ${customerList}">
 							        <td th:text="${customer.userAccount.id}">John</td>
-							        
-							        <td>john@example.com</td>
 							        <td th:text="${customer.address}"></td>
-							        <td><a href=""><img th:src="@{/resources/img/ic_delete.png}" alt="post"></a></td>
 							      </tr>
 							      
 							    </tbody>
