@@ -1,9 +1,14 @@
 package videoshop.shoes.inventory;
 
+import java.util.ArrayList;
+import java.util.List;
+import org.salespointframework.catalog.Product;
 import org.salespointframework.catalog.ProductIdentifier;
 import org.salespointframework.core.DataInitializer;
 import org.salespointframework.inventory.Inventory;
 import org.salespointframework.inventory.InventoryItem;
+import org.salespointframework.order.Cart;
+import org.salespointframework.order.CartItem;
 import org.salespointframework.quantity.Quantity;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -57,6 +62,16 @@ public class ShoesInventoryDataInitializer implements DataInitializer{
 	
 	public void deleteAll() {
 		inventory.deleteAll();
+	}
 	
+	public List<Product> checkInventory(List<CartItem> cart) {
+		List<Product> exceeds = new ArrayList<Product>();
+		for (int i = 0; i < cart.size(); i++) {
+			String shoesCheck = inventory.findByProduct(cart.get(i).getProduct()).get().getQuantity().toString();
+			if(Integer.parseInt(cart.get(i).getQuantity().toString()) > Integer.parseInt(shoesCheck)) {
+				exceeds.add(cart.get(i).getProduct());
+			}
+		}
+		return exceeds;	
 	}
 }

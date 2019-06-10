@@ -16,13 +16,13 @@
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav ml-auto">
-							<li class="nav-item active"><a class="nav-link" href="index-2.html">Home</a></li>
+							<li class="nav-item active"><a class="nav-link" href="http://localhost:8080">Home</a></li>
 
 
 							<li class="nav-item"><a class="nav-link" href="http://localhost:8080/shoes/catalog">Shop Category</a></li>
 							<li class="nav-item"><a class="nav-link" sec:authorize="hasRole('ROLE_BOSS')" href="http://localhost:8080/management/orders">Management</a></li>
 
-							<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+							<li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
 							<li class="nav-item"><a class="nav-link" sec:authorize="!isAuthenticated()" href="http://localhost:8080/login">Login</a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
