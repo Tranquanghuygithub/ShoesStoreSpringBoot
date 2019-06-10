@@ -20,8 +20,7 @@
                 <div class="col-first">
                     <h1>Management Page</h1>
                     <nav class="d-flex align-items-center">
-                        <a href="index-2.html">Home<span class="lnr lnr-arrow-right"></span></a>
-                        <a href="category.html">Blog</a>
+                        
                     </nav>
                 </div>
             </div>
@@ -46,22 +45,23 @@
                     
                         <aside class="single_sidebar_widget search_widget">
                         <h4 class="widget_title">PRODUCT MANAGEMENT</h4>
-                        
-                            <div class="row">
-							  <div class="col-6 col-md-4"></div>
-							  <div class="col-6 col-md-6">
-							  	<div class="input-group">
-	                                <input type="text" class="form-control" placeholder="Search " onfocus="if (!window.__cfRLUnblockHandlers) return false; this.placeholder = ''" onblur="if (!window.__cfRLUnblockHandlers) return false; this.placeholder = 'Search Posts'" data-cf-modified-b98379993bc7fc32e17d77d1-="">
-	                                <span class="input-group-btn">
-	                                    <button class="btn btn-default" type="button"><i class="lnr lnr-magnifier"></i></button>
-	                                </span>
-	                            </div><!-- /input-group -->
-							  </div>
-							  <div class="col-6 col-md-2">
-							  	
-	                            <a style="height: 38px" href="http://localhost:8080/management/addShoes" class="genric-btn primary   circle arrow">Add New<span class="lnr lnr-arrow-right"></span></a>
-							  </div>
-							</div>
+                        	<form action="" th:action="@{http://localhost:8080/management/shoesStock/}" method="get" th:object="${search}">
+	                            <div class="row">
+								  <div class="col-6 col-md-4"></div>
+								  <div class="col-6 col-md-6">
+								  	<div class="input-group">
+							  		 	<input type="text" name="search" class="form-control" placeholder="Search " th:value="${search}">
+		                                <span class="input-group-btn">
+		                                    <button class="btn btn-default" type="submit"><i class="lnr lnr-magnifier"></i></button>
+		                                </span>  		
+		                            </div><!-- /input-group -->
+								  </div>
+								  <div class="col-6 col-md-2">
+								  	
+		                            <a style="height: 38px" href="http://localhost:8080/management/addShoes" class="genric-btn primary   circle arrow">Add New<span class="lnr lnr-arrow-right"></span></a>
+								  </div>
+								</div>
+							</form>
                             </br>
                             
                             <table class="table">
@@ -76,26 +76,13 @@
 							    </thead>
 							    <tbody>
 							      <tr th:each=" item : ${stock}">
-							        <td><img style="height: 100px" th:src="@{/resources/img/product/{name}.jpg(name=${item.product.image})}" alt="post"></td>
+							        <td><img style="height: 100px" th:src="@{/resources/img/product/{name}(name=${item.product.image})}" alt="post"></td>
 							        <td th:text="${item.product.name}">Vans</td>
 							        <td th:text="${{item.quantity}}">5</td>
-							        <td><a href=""><img th:src="@{/resources/img/ic_edit.png}" alt="post"></a></td>
-							        <td><a href=""><img th:src="@{/resources/img/ic_delete.png}" alt="post"></a></td>
+							        <td><a th:href="@{../../shoes/gettoedit/{id}(id=${item.getProduct().getId()})}"><img th:src="@{/resources/img/ic_edit.png}" alt="post"></a></td>
+							        <td><a th:href="@{../../shoes/delete/{id}(id=${item.getProduct().getId()})}" onclick="return confirm('Are you sure?')"><img th:src="@{/resources/img/ic_delete.png}" alt="post"></a></td>
 							      </tr>
-							      <tr>
-							        <td><img style="height: 100px" th:src="@{/resources/img/product/e-p1.png}" alt="post"></td>
-							        <td>Nike</td>
-							        <td>30</td>
-							        <td><a href=""><img th:src="@{/resources/img/ic_edit.png}" alt="post"></a></td>
-							        <td><a href=""><img th:src="@{/resources/img/ic_delete.png}" alt="post"></a></td>
-							      </tr>
-							      <tr>
-							        <td><img style="height: 100px" th:src="@{/resources/img/product/e-p1.png}" alt="post"></td>
-							        <td>ThaiLau</td>
-							        <td>10</td>
-							        <td><a href=""><img th:src="@{/resources/img/ic_edit.png}" alt="post"></a></td>
-							        <td><a href=""><img th:src="@{/resources/img/ic_delete.png}" alt="post"></a></td>
-							      </tr>
+							      
 							    </tbody>
 							  </table>
                         </aside>

@@ -95,4 +95,8 @@ class CustomerDataInitializer implements DataInitializer {
 
 		customerRepository.saveAll(Arrays.asList(c1, c2, c3, c4));
 	}
+	
+	public void deleteCustomer(UserAccount userAccount) {
+		userAccountManager.delete(userAccount);
+	}
 }

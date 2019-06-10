@@ -21,8 +21,8 @@
                 <div class="col-first">
                     <h1>Shopping Cart</h1>
                     <nav class="d-flex align-items-center">
-                        <a href="index-2.html">Home<span class="lnr lnr-arrow-right"></span></a>
-                        <a href="category.html">Cart</a>
+                        <a href="#">Home<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="#">Cart</a>
                     </nav>
                 </div>
             </div>
@@ -95,7 +95,11 @@
                                 	
                                 </td>
                             </tr>
-
+							<tr th:unless="${exceedsShoes.empty}">
+							  <div class="alert alert-warning" th:each="item : ${exceedsShoes}">
+							    <strong th:text="${item.name}">Warning!</strong > exceeded the quantity in stock
+							  </div>
+							</tr>
                             
                             <tr class="out_button_area">
                                 <td>
@@ -120,6 +124,7 @@
                         </tbody>
                     </table>
                     </form>
+                    
                 </div>
             </div>
         </div>

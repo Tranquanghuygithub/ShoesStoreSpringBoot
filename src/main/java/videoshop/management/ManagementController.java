@@ -1,5 +1,9 @@
 package videoshop.management;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import org.salespointframework.inventory.Inventory;
 import org.salespointframework.inventory.InventoryItem;
 import org.salespointframework.order.Order;
@@ -11,10 +15,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import videoshop.customer.Customer;
 import videoshop.customer.CustomerManagement;
+import videoshop.shoes.catalog.AddShoesForm;
 import videoshop.shoes.catalog.Shoes;
 
 
@@ -68,11 +75,109 @@ public class ManagementController {
 	
 	@GetMapping("/addShoes")
 	//@PreAuthorize("hasRole('BOSS')")
-	String AddShoes(Model model) {
+	String AddShoes(Model model, AddShoesForm Shoesform) {
 
-		//model.addAttribute("stock", inventory.findAll());
+		model.addAttribute("productform", Shoesform);
 
 		return "add_shoes";
+	}
+	
+	@GetMapping("/updateShoes")
+	//@PreAuthorize("hasRole('BOSS')")
+	String UpdateShoes(Model model, AddShoesForm Shoesform) {
+
+		model.addAttribute("productform", Shoesform);
+
+		return "edit_shoes";
+	}
+	
+	@GetMapping(value = "/shoesStock/")
+	String SearchShoes(@RequestParam(value = "search", required = false) String q, Model model) {
+
+		if (q.isEmpty()) {
+			model.addAttribute("stock", inventory.findAll());
+		} else {
+			
+			List<InventoryItem> shoesList = (List<InventoryItem>) inventory.findAll();
+			
+			List<InventoryItem> shoesListResult = new ArrayList<InventoryItem>(); 
+						
+			for (InventoryItem inventoryItem : shoesList) {
+				if (inventoryItem.getProduct().getName().contains(q)) {
+					shoesListResult.add(inventoryItem);
+				}
+			}
+	
+			model.addAttribute("stock", shoesListResult);
+			
+			model.addAttribute("search", q);
+
+		}
+
+		return "shoesstock";
+	}
+	
+	
+	@GetMapping(value = "/orders/")
+	String SearchOrder(@RequestParam(value = "search", required = false) String q, Model model) {
+
+		if (q.isEmpty()) {
+			model.addAttribute("ordersCompleted", orderManager.findBy(OrderStatus.COMPLETED));
+		} else {
+			
+			Streamable<Order> orderList = orderManager.findBy(OrderStatus.COMPLETED);
+			
+			List<Order> orderListResult = new ArrayList<Order>(); 
+						
+			for (Order item : orderList) {
+				if (item.getUserAccount().getUsername().contains(q)) {
+					orderListResult.add(item);
+				}
+			}
+	
+			model.addAttribute("ordersCompleted", orderListResult);
+			
+			model.addAttribute("search", q);
+
+		}
+
+		return "orders_management";
+	}
+	
+	@GetMapping(value = "/customers/")
+	String SearchCustomer(@RequestParam(value = "search", required = false) String q, Model model) {
+
+		if (q.isEmpty()) {
+			model.addAttribute("customerList", customerManagement.findAll());
+		} else {
+			
+			Streamable<Customer> customerList = customerManagement.findAll();
+			
+			List<Customer> customerListResult = new ArrayList<Customer>(); 
+						
+			for (Customer item : customerList) {
+				if (item.getUserAccount().getUsername().contains(q)) {
+					customerListResult.add(item);
+				}
+			}
+	
+			model.addAttribute("customerList", customerListResult);
+			
+			model.addAttribute("search", q);
+
+		}
+
+		return "customer_management";
+	}
+	
+	
+	@GetMapping("/orders/{order}")
+	//@PreAuthorize("hasRole('BOSS')")
+	String DeleteOrder(@PathVariable Order order, Model model) {
+
+		
+
+		return "redirect:";
 	}
 	
 	
