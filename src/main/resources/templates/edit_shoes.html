@@ -48,23 +48,23 @@
                         <aside class="single_sidebar_widget search_widget">
                         <h4 class="widget_title">ADD NEW PRODUCT</h4>
                         
-                            <form class="row contact_form" enctype="multipart/form-data" th:action="@{../../shoes/addshoes}" method="post" th:object="${productform}" novalidate="novalidate" >
+                            <form class="row contact_form" enctype="multipart/form-data" th:action="@{../../shoes/updateshoes}" th:object="${productform}" method="post"  novalidate="novalidate" >
 	                            <div class="col-md-12 form-group p_star">
-	                                <input type="text" class="form-control" id="name" name="name"  placeholder="Shoes Name" required="required">
+	                                <input type="text" class="form-control" id="name" name="name" th:value="${shoes.name}"   required="required">
 
 	                            </div>
 
 	                            <div class="col-md-12 form-group p_star"> 
 	                            	<div class="row">
 	                            			<div class="col-md-3">
-	                            				<input type="file" name="file"> 
+	                            				<input type="file" name="file" th:value="${shoes.name}"> 
 	                            			</div>
 			                            	 
 	                            	</div>
 	                               
 	                            </div>
 	                            <div class="col-md-12 form-group p_star">
-	                                <input type="number" class="form-control" id="price" name="price"  placeholder="Price" required="required">
+	                                <input type="number" class="form-control" id="price" name="price" th:value="${shoesPrice}" required="required">
 	                                
 	                            </div>
 	                            
@@ -75,15 +75,15 @@
 	                            
 	                                 <div class="col-md-12 form-group p_star">
 		                                <select id="shoestype" name="shoestype"  class="country_select" style="display: none;">
-		                                    <option value="adidas">Adidas</option>
-		                                    <option value="nike">Nike</option>
-		                                    <option value="converse">Converse</option>
-		                                    <option value="vans">Vans</option>
+		                                    <option th:selected="(${test} == 'adidas')" value="adidas">Adidas</option>
+		                                    <option th:selected="(${test} == 'nike')" value="nike">Nike</option>
+		                                    <option th:selected="(${test} == 'converse')" value="converse">Converse</option>
+		                                    <option th:selected="(${test} == 'vans')" value="vans">Vans</option>
 		                                </select>
 	                         
 	                            </div>
 	                            <div class="col-md-12 form-group p_star">
-	                                <input type="text" class="form-control" id="description" name="description"  placeholder="Description" required="required">
+	                                <input type="text" class="form-control" id="description" name="description" th:value="${shoes.description}" placeholder="Description" required="required">
 	                               
 	                            </div>
 	                       
@@ -97,7 +97,7 @@
 	                            	</div>
 	                            	<div class="col-md-6" style="padding-left: 111px">
 	                            		<div class="row">
-	                            			<button type="submit" class="primary-btn">ADD NEW</button>
+	                            			<button type="submit" class="primary-btn">UPDATE</button>
 	                            			<a class="primary-btn" style="margin-left: 7px" href="#">BACK</a>
 	                            		</div>
 	                            
