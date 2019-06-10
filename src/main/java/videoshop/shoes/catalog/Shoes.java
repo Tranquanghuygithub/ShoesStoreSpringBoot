@@ -49,9 +49,17 @@ public class Shoes extends Product{
 	public String getImage() {
 		return image;
 	}
+	
+	public void setImage(String image) {
+		this.image = image;
+	}
 
 	public ShoesType getType() {
 		return type;
+	}
+	
+	public void setType(ShoesType type) {
+		this.type = type;
 	}
 	
 	public String getDescription() {
@@ -61,4 +69,5 @@ public class Shoes extends Product{
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
 }

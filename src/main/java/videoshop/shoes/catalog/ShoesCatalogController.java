@@ -171,4 +171,87 @@ public class ShoesCatalogController {
 		return "redirect:../../management/shoesStock";
 
 	}
+	Shoes shoesUpdate;
+	@GetMapping("/gettoedit/{shoes}")
+	String GetToEdit(@PathVariable Shoes shoes, Model model) {
+
+//		Optional<InventoryItem> item = inventory.findByProductIdentifier(disc.getId());
+//		Quantity quantity = item.map(InventoryItem::getQuantity).orElse(NONE);
+		
+		Optional<InventoryItem> item = inventory.findByProductIdentifier(shoes.getId());
+	
+		
+//		System.out.println(shoes.getImage());
+		
+		String priceString = shoes.getPrice().toString();
+		
+		String[] parts = priceString.split(" ");
+		
+		String part2 = parts[1];
+		String typeshoes = checkTypeValue(shoes.getType());
+		
+		shoesUpdate = shoes;
+		
+		model.addAttribute("shoes", shoes);
+		model.addAttribute("shoesPrice", part2);
+		model.addAttribute("test", typeshoes);
+	
+//		model.addAttribute("disc", disc);
+//		model.addAttribute("quantity", quantity);
+//		model.addAttribute("orderable", quantity.isGreaterThan(NONE));
+		
+		
+		
+		return "edit_shoes";
+	}
+	
+	public String checkTypeValue(ShoesType value) {
+		
+		if(value == ShoesType.ADIDAS) {
+			return "adidas";
+		}
+		else if(value == ShoesType.CONVERSE) {
+			return "converse";
+		}
+		else if(value == ShoesType.NIKE) {
+			return "nike";
+		}
+		
+		return "vans";
+	}
+	
+	@PostMapping("/updateshoes")
+	String UpdateShoes(@Valid AddShoesForm productform, @RequestParam("shoestype") String shoestype, @RequestParam("file") MultipartFile file) {
+		
+	
+		shoesUpdate.setName(productform.getName());
+		shoesUpdate.setPrice(Money.of(Integer.parseInt(productform.getPrice()), EURO));
+		ShoesType type = checkShoesType(shoestype);
+		shoesUpdate.setType(type);
+		shoesUpdate.setDescription(productform.getDescription());
+		if(file != null) {
+			byte[] bytes;
+			try {
+				bytes = file.getBytes();
+				Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
+			    Files.write(path, bytes);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			shoesUpdate.setImage(file.getOriginalFilename());
+		}
+	
+		
+		ShoesCatalogDataInitializer catalogData = new ShoesCatalogDataInitializer(shoesCatalog);
+		catalogData.addShoes(shoesUpdate);
+		
+		System.out.println(productform.getName());
+		System.out.println(productform.getPrice());
+		
+		System.out.println(file.getOriginalFilename());
+		System.out.println(shoestype);
+		System.out.println(productform.getDescription());
+		return "redirect:/";
+	}
 }

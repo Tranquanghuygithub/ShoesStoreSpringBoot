@@ -79,7 +79,7 @@
 							        <td><img style="height: 100px" th:src="@{/resources/img/product/{name}(name=${item.product.image})}" alt="post"></td>
 							        <td th:text="${item.product.name}">Vans</td>
 							        <td th:text="${{item.quantity}}">5</td>
-							        <td><a href=""><img th:src="@{/resources/img/ic_edit.png}" alt="post"></a></td>
+							        <td><a th:href="@{../../shoes/gettoedit/{id}(id=${item.getProduct().getId()})}"><img th:src="@{/resources/img/ic_edit.png}" alt="post"></a></td>
 							        <td><a th:href="@{../../shoes/delete/{id}(id=${item.getProduct().getId()})}" onclick="return confirm('Are you sure?')"><img th:src="@{/resources/img/ic_delete.png}" alt="post"></a></td>
 							      </tr>
 							      

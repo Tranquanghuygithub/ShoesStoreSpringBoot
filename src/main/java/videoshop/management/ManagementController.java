@@ -82,6 +82,15 @@ public class ManagementController {
 		return "add_shoes";
 	}
 	
+	@GetMapping("/updateShoes")
+	//@PreAuthorize("hasRole('BOSS')")
+	String UpdateShoes(Model model, AddShoesForm Shoesform) {
+
+		model.addAttribute("productform", Shoesform);
+
+		return "edit_shoes";
+	}
+	
 	@GetMapping(value = "/shoesStock/")
 	String SearchShoes(@RequestParam(value = "search", required = false) String q, Model model) {
 
