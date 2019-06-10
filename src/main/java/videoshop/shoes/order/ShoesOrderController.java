@@ -1,12 +1,15 @@
 package videoshop.shoes.order;
 
+import java.util.ArrayList;
 import java.util.Optional;
-
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.salespointframework.catalog.Product;
 import org.salespointframework.core.AbstractEntity;
+import org.salespointframework.inventory.Inventory;
+import org.salespointframework.inventory.InventoryItem;
 import org.salespointframework.order.Cart;
 import org.salespointframework.order.CartItem;
 import org.salespointframework.order.Order;
@@ -27,8 +30,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+
 import videoshop.catalog.Disc;
 import videoshop.shoes.catalog.Shoes;
+import videoshop.shoes.catalog.ShoesCatalog;
+import videoshop.shoes.inventory.ShoesInventoryDataInitializer;
 
 
 @Controller
@@ -44,8 +50,11 @@ class ShoesOrderController
 	 * 
 	 * @param orderManager must not be {@literal null}.
 	 */
-	ShoesOrderController(OrderManager<Order> orderManager) {
-
+	private final ShoesCatalog shoesCatalog;
+	private final Inventory<InventoryItem> inventory;
+	ShoesOrderController(OrderManager<Order> orderManager, ShoesCatalog shoesCatalog, Inventory<InventoryItem> inventory) {
+		this.shoesCatalog = shoesCatalog;
+		this.inventory = inventory;
 		Assert.notNull(orderManager, "OrderManager must not be null!");
 		this.orderManager = orderManager;
 	}
@@ -136,21 +145,22 @@ class ShoesOrderController
 		return "redirect:http://localhost:8080/orders/shoescart";
 	}
 	@PostMapping("updatecart")
-	String updatecart(@RequestParam("qty") int[] quantity,@RequestParam("id") Shoes[] shoes, @ModelAttribute Cart cart) {
+	String updatecart(@RequestParam("qty") int[] quantity,@RequestParam("id") Shoes[] shoes, @ModelAttribute Cart cart ) {
 		cart.clear();
 		for(int i =0; i < quantity.length; i++) {
 			cart.addOrUpdateItem(shoes[i], Quantity.of(quantity[i]));
 		}
-		System.out.println(shoes[0]);
-		System.out.println(quantity[0]);
+
 		return "redirect:http://localhost:8080/orders/shoescart";
 	}
 	
 	
 	@GetMapping("/shoescart")
-	String basket() {
+	String basket(Model model) {
 //		int cartsize = cart.toList().size();
 //		session.setAttribute("cartsize", cartsize);
+		List<Product> exceedsShoes = new ArrayList<Product>();
+		model.addAttribute("exceedsShoes", exceedsShoes);
 		return "shoescart";
 	}
 	
@@ -160,8 +170,20 @@ class ShoesOrderController
 	}
 	
 	@GetMapping("/shoescheckout")
-	String checkout() {
-		return "shoescheckout";
+	String checkout(Model model, @ModelAttribute Cart cart) {
+		ShoesInventoryDataInitializer dataInitializer = new ShoesInventoryDataInitializer(inventory, shoesCatalog);
+		List<Product> exceedsShoes = new ArrayList<Product>();
+		exceedsShoes = dataInitializer.checkInventory(cart.toList());
+		if(exceedsShoes.size() == 0) {
+			return "shoescheckout";
+		}
+		else {
+			String cc = "ccc";
+			model.addAttribute("exceedsShoes", exceedsShoes);
+			System.out.println(exceedsShoes);
+			return "shoescart";
+		}
+		
 	}
 
 	/**
@@ -173,7 +195,7 @@ class ShoesOrderController
 	 * @return the view name.
 	 */
 	@PostMapping("/checkout1")
-	String buy(@ModelAttribute Cart cart, @LoggedIn Optional<UserAccount> userAccount) {
+	String buy(@ModelAttribute Cart cart, @LoggedIn Optional<UserAccount> userAccount, HttpSession session) {
 		
 		UserAccount user = userAccount.get();
 		
@@ -208,7 +230,9 @@ class ShoesOrderController
 				
 				cart.clear();
 			}
-		
+			
+			int cartsize = cart.toList().size();
+			session.setAttribute("cartsize", cartsize);
 			
 			return "redirect:/";
 		}
