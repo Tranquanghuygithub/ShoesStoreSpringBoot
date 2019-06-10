@@ -42,8 +42,8 @@
            				 <form class="item" sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
            				 	<div class="row">
            				 		<div class="col-md-6">
-           				 			<div class="right menu" style="  margin-top: 16px; font-size: 20px; color: #fd6c00;">
-	                					<p  th:text="${'Hello:  ' + #authentication?.name}"></p>
+           				 			<div class="right menu" style="  margin-top: 16px; font-size: 20px; color: #fd6c00; text-align: right;">
+	                					<p  th:text="${'Hello:  ' + #authentication?.name}" style="font-size: 16px;"></p>
 	        						</div>
            				 		</div>
            				 		<div class="col-md-6" style="margin: auto;">
