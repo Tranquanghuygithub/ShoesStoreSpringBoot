@@ -50,7 +50,7 @@
                         
                             <form class="row contact_form" enctype="multipart/form-data" th:action="@{../../shoes/addshoes}" method="post" th:object="${productform}" novalidate="novalidate" >
 	                            <div class="col-md-12 form-group p_star">
-	                                <input type="text" class="form-control" id="name" name="name"  placeholder="Shoes Name" required="required">
+	                                <input type="text" class="form-control" id="name" name="name"  placeholder="Shoes Name" required>
 
 	                            </div>
 
@@ -68,10 +68,7 @@
 	                                
 	                            </div>
 	                            
-	                              <div class="col-md-12 form-group p_star">
-	                                <input type="number" class="form-control" id="inventory" name="inventory"  placeholder="Inventory number" required="required">
-	                                
-	                            </div>
+	                     
 	                            
 	                                 <div class="col-md-12 form-group p_star">
 		                                <select id="shoestype" name="shoestype"  class="country_select" style="display: none;">
