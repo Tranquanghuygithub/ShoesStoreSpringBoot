@@ -20,15 +20,16 @@
 
 
 							<li class="nav-item"><a class="nav-link" href="http://localhost:8080/shoes/catalog">Shop Category</a></li>
-							<li class="nav-item"><a class="nav-link" sec:authorize="hasRole('ROLE_BOSS')" href="http://localhost:8080/management/orders">Management</a></li>
+							<li class="nav-item" sec:authorize="hasRole('ROLE_BOSS')"><a class="nav-link"  href="http://localhost:8080/management/orders">Management</a></li>
 
-							<li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-							<li class="nav-item"><a class="nav-link" sec:authorize="!isAuthenticated()" href="http://localhost:8080/login">Login</a></li>
+							<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+							<li class="nav-item" sec:authorize="!isAuthenticated()"><a class="nav-link"  href="http://localhost:8080/login">Login</a></li>
+
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
 
 							<li class="nav-item"><a href="http://localhost:8080/orders/shoescart" class="cart"><span class="ti-bag"></span></a></li>
-							<span class='badge badge-warning' id='lblCartCount' th:text="${session.cartsize}"> 5 </span>
+							<span class='badge badge-warning' id='lblCartCount' th:text="${session.cartsize}">  </span>
 
 							<li class="nav-item">
 								<button class="search"><span class="lnr lnr-magnifier" id="search"></span></button>
@@ -43,7 +44,7 @@
            				 	<div class="row">
            				 		<div class="col-md-6">
            				 			<div class="right menu" style="  margin-top: 16px; font-size: 20px; color: #fd6c00; text-align: right;">
-	                					<p  th:text="${'Hello:  ' + #authentication?.name}" style="font-size: 16px;"></p>
+	                					<p  th:text="${'Hello  ' + #authentication?.name}" style="font-size: 16px;"></p>
 	        						</div>
            				 		</div>
            				 		<div class="col-md-6" style="margin: auto;">
