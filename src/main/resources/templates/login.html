@@ -45,22 +45,20 @@
 				<div class="col-lg-6">
 					<div class="login_form_inner">
 						<h3>Log In</h3>
-						<form class="row login_form" role="form" th:action="@{/login}" method="post" 
-						 id="contactForm" novalidate="novalidate">
+						<form class="row login_form" role="form" id="form_login" th:action="@{/login}" method="post" onsubmit="return validateForm()" name="myForm">
 							<div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="username" name="username" placeholder="Username" 
-								onfocus="if (!window.__cfRLUnblockHandlers) return false; this.placeholder = ''
-								" onblur="if (!window.__cfRLUnblockHandlers) return false; this.placeholder = 'Username'" 
-								data-cf-modified-fd2c530eb23092ed3c29bac9-="">
+								<input type="text" class="form-control" id="username" name="username" placeholder="Username" 								
+								data-cf-modified-fd2c530eb23092ed3c29bac9-="" >
+								<span style="color: red;" id="username_errors"></span>
 							</div>
 							<div class="col-md-12 form-group">
 								<input type="password" class="form-control" id="password" name="password" placeholder="Password"
-								 onfocus="if (!window.__cfRLUnblockHandlers) return false; this.placeholder = ''"
-								 onblur="if (!window.__cfRLUnblockHandlers) return false; this.placeholder = 'Password'" 
-								 data-cf-modified-fd2c530eb23092ed3c29bac9-="">
+								 data-cf-modified-fd2c530eb23092ed3c29bac9-="" >
+								 <span style="color: red;" id="pass_errors"></span>
 							</div>
 							<div class="col-md-12 form-group">
-								<button type="submit"  th:text="#{login.login}" class="primary-btn login" >Log In</button>
+								<span id ="ketqua"></span>
+								<button type="submit" name="sumit" id="submit"   class="primary-btn login" >Log In</button>
 							</div>
 						</form>
 					</div>
@@ -74,18 +72,24 @@
 	<footer th:include="footer :: footer" class="footer-area section_gap"></footer>
 	<!-- End footer Area -->
 	<div th:include="bottom :: bottom"></div>
-</body>
-	<!-- <script>
-		$(document).ready(function()){
-			$(.login).click(function(){
-				$.alert({
-					title : 'Welcom to our.',
-					type  :	'green',
-					content : value,
-				});
-			});
-			
-		}
+		<!-- <script type="text/javascript">
+		$(document).ready(function(){
+			$("#submit").click(function(){
+				var username = $("#username").val();
+				var pass     = $("#password").val();
+				var duongdan= window.location.href;
+				var chuyentrang= window.location.href;
+				if(duongdan == "http://localhost:8080/login?error"){
+					$("#ketqua").text("Đăng nhập thất bại")
+				}else{
+					window.location = chuyentrang;
+				}
+				
+			})
+		});	
 	</script> -->
+</body>
+	
+
 <!-- Mirrored from colorlib.com/preview/theme/karma/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 27 May 2019 15:33:36 GMT -->
 </html>
