@@ -49,10 +49,14 @@
                         <h4 class="widget_title">ADD NEW PRODUCT</h4>
                         
                             <form class="row contact_form" enctype="multipart/form-data" th:action="@{../../shoes/addshoes}" method="post" th:object="${productform}" novalidate="novalidate" >
+	                           
+	                      
+	                           
 	                            <div class="col-md-12 form-group p_star">
-	                                <input type="text" class="form-control" id="name" name="name"  placeholder="Shoes Name" required>
+	                                <input type="text" class="form-control"  id="name" name="name"  placeholder="Shoes Name" required>
 
 	                            </div>
+	                       
 
 	                            <div class="col-md-12 form-group p_star"> 
 	                            	<div class="row">

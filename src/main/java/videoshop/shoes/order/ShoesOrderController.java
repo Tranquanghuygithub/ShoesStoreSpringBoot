@@ -201,22 +201,7 @@ class ShoesOrderController
 		
 	
 		
-//		return userAccount.map(useracc -> {
-//
-//			// (｡◕‿◕｡)
-//			// Mit completeOrder(…) wird der Warenkorb in die Order überführt, diese wird dann bezahlt und abgeschlossen.
-//			// Orders können nur abgeschlossen werden, wenn diese vorher bezahlt wurden.
-//			Order order = new Order(useracc);
-//
-//			cart.addItemsTo(order);
-//
-//			orderManager.payOrder(order);
-//			orderManager.completeOrder(order);
-//
-//			cart.clear();
-//
-//			return "redirect:/";
-//		}).orElse("redirect:/cart");
+
 		if(user != null) {
 			Order order = new Order(user, Cash.CASH);
 			if(cart.isEmpty()) {
