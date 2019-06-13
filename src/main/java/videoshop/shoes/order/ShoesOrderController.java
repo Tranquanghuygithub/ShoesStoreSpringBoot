@@ -179,7 +179,6 @@ class ShoesOrderController
 			return "shoescheckout";
 		}
 		else {
-			String cc = "ccc";
 			model.addAttribute("exceedsShoes", exceedsShoes);
 			System.out.println(exceedsShoes);
 			return "shoescart";

@@ -133,6 +133,7 @@ public class ShoesCatalogController {
 		Shoes shoes = new Shoes(productform.getName(), file.getOriginalFilename(), Money.of(Integer.parseInt(productform.getPrice()), EURO), type, productform.getDescription());
 		ShoesCatalogDataInitializer catalogData = new ShoesCatalogDataInitializer(shoesCatalog);
 		catalogData.addShoes(shoes);
+		inventory.save(new InventoryItem(shoes, Quantity.of(10)));
 		
 		byte[] bytes;
 		try {
