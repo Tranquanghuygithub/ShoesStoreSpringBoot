@@ -18,6 +18,7 @@ import org.salespointframework.quantity.Quantity;
 import org.salespointframework.time.BusinessTime;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.common.collect.Iterables;
-
+import org.springframework.validation.Errors;
 import videoshop.catalog.CatalogDataInitializer;
 import videoshop.catalog.Comment;
 import videoshop.catalog.Disc;
@@ -122,13 +123,17 @@ public class ShoesCatalogController {
 	
 
 
-	private static String UPLOADED_FOLDER = "D:\\ShoesStoreSpringBoot\\src\\main\\resources\\static\\resources\\img\\product\\";
-	@PostMapping("/addshoes")
-	String AddShoes(@Valid AddShoesForm productform, @RequestParam("shoestype") String shoestype, @RequestParam("file") MultipartFile file) {
-		
+	private static String UPLOADED_FOLDER = "src\\main\\resources\\static\\resources\\img\\product\\";
 	
-       
+	@PostMapping("/addshoes")
+	String AddShoes(@Valid AddShoesForm productform, Errors result,@RequestParam("shoestype") String shoestype, @RequestParam("file") MultipartFile file) {
 		
+		if (result.hasErrors()) {
+			return "addshoes";
+		}
+		
+       Assert.notNull(productform, "Add shoes form must not be null");
+       
 		ShoesType type = checkShoesType(shoestype);
 		Shoes shoes = new Shoes(productform.getName(), file.getOriginalFilename(), Money.of(Integer.parseInt(productform.getPrice()), EURO), type, productform.getDescription());
 		ShoesCatalogDataInitializer catalogData = new ShoesCatalogDataInitializer(shoesCatalog);
